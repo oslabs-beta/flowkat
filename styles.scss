@@ -24,8 +24,16 @@ body {
   #vis-container {
     display: grid;
     // width: 90%;
-    grid-template-rows: 1fr 1fr 1fr;
+    //Five rows is accurate??: 3 for Producers/Brokers/Consumers, 2 for the lines connecting them
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     background-color: rgb(224, 240, 255);
     justify-content: space-evenly;
+
+    #producers {
+      g {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
   }
 }

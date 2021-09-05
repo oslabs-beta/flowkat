@@ -2,11 +2,15 @@
 
 <html>
   <head>
+    <title>FlowKat</title>
+    <link rel="shortcut icon" type="image/png" href="./src/static/FlowKatIcon.png"/>
     <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self'" /> -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://d3js.org" />
   </head>
   <body>
     <div id="root"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="./build/js/app.js"></script>
   </body>
 </html>

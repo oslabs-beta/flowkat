@@ -8,7 +8,7 @@ import MainContainer from './components/main/MainContainer.jsx';
 import OptionsContainer from './components/options/OptionsContainer.jsx';
 import DebuggingContainer from './components/debugging-/DebuggingContainer.jsx';
 
-import '../styles.scss';
+import '.././styles.scss';
 
 class App extends Component {
   constructor(props) {
@@ -22,13 +22,13 @@ class App extends Component {
           <NavBar/>
 
           <Switch>
-            <Route path="/vis">
+            <Route exact path="/vis">
               <VisContainer/>
             </Route>
-            <Route path="/debug">
+            <Route exact path="/debug">
               <DebuggingContainer/>
             </Route>
-            <Router path="/options">
+            <Router exact path="/options">
               <OptionsContainer/>
             </Router>
             <Router path="/">
