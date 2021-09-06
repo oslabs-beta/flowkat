@@ -9,34 +9,79 @@ class VisContainer extends Component {
   componentDidMount() {
     console.log('VisContainer Mounted');
 
-    // d3.select('#d3-test')
-    //   .selectAll('p')
-    //   .data([1, 2, 3, 4])
-    //   .enter()
-    //   .append('p')
-    //   .text(dta => `My value is: ${dta}`);
-
-    d3.select('#producers')
+    const producers_group = d3.select('#producers')
       .append('g')
-      .attr('width', 100)
-      .attr('height', 100)
-      .selectAll('svg')
+      .attr('width', 500)
+      .attr('height', 500)
+
+      producers_group.selectAll('svg')
       .data(['Service 1', 'Service 2', 'Service 3'])
       .enter()
       .append('svg')
-      .text(dta => dta)
-      .attr('width', 25)
-      .attr('height', 25)
-      .attr('fill', '#40F99B')
+      // .attr('viewBox', '0 0 25 25')
+      .attr('width', 100)
+      .attr('height', 100)
+      .append('circle')
+      // .text(dta => dta)
+      .attr('r', 30)
+      .attr('cx', 50)
+      .attr('cy', 50)
+      .attr('fill', '#0cc440')
+      .attr('stroke', 'black')
+      .attr('stroke-width', 3)
+
+      const brokers_group = d3.select('#brokers')
+      .append('g')
+      .attr('width', 500)
+      .attr('height', 500)
+
+      brokers_group.selectAll('svg')
+      .data(['Broker 1', 'Broker 2'])
+      .enter()
+      .append('svg')
+      // .attr('viewBox', '0 0 25 25')
+      .attr('width', 150)
+      .attr('height', 150)
+      .append('rect')
+      // .text(dta => dta)
+      .attr('x', 50)
+      .attr('y', 50)
+      .attr('width', 50)
+      .attr('height', 50)
+      .attr('rx', 10)
+      .attr('ry', 10)
+      .attr('fill', '#b02068') //hibiscus!
+      .attr('stroke', 'black')
+      .attr('stroke-width', 3)
+
+      const consumers_group = d3.select('#consumers')
+      .append('g')
+      .attr('width', 500)
+      .attr('height', 500)
+
+      consumers_group.selectAll('svg')
+      .data(['Service 1', 'Service 2', 'Service 3'])
+      .enter()
+      .append('svg')
+      // .attr('viewBox', '0 0 25 25')
+      .attr('width', 100)
+      .attr('height', 100)
+      .append('circle')
+      // .text(dta => dta)
+      .attr('r', 30)
+      .attr('cx', 50)
+      .attr('cy', 50)
+      .attr('fill', '#0cc440')
+      .attr('stroke', 'black')
+      .attr('stroke-width', 3)
   }
 
   render() {
     return (
       <div id="vis-container">
-        <div id="d3-test">D3 TESTING:</div>
-        <div id="producers">PRODUCERS HERE</div>
-        <p><span id="brokers">BROKERS HERE</span>   <span id="zookeeper">ZOOKEEPER HERE</span></p>
-        <div id="consumers">CONSUMERS HERE</div>
+        <div id="producers"></div>
+        <div id="brokers"></div>
+        <div id="consumers"></div>
       </div>
     );
   };
