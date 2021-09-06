@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom'
 
-class DebuggingContainer extends Component {
+class DebugCard extends Component {
   constructor(props) {
     super(props)
   }
@@ -9,10 +9,11 @@ class DebuggingContainer extends Component {
   render() {
     return (
       <div id="debug-card">
-        <h1>This is the Debugging tab.</h1>
+        <p key="errortype">Error: {this.props.errortype}</p>
+        <p key="nodesinvolved">Nodes Involved: {this.props.nodesinvolved}</p>
       </div>
     );
   };
 }
 
-export default DebuggingContainer;
+export default DebugCard;

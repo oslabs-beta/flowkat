@@ -17,8 +17,13 @@ body {
     // width: 90%;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     gap: 10em;
+    align-content: space-between;
     border: 1px solid #eac0ff;
     background-color: #eac0ff;
+
+    a {
+      margin: auto;
+    }
   }
 
   #vis-container {
@@ -27,7 +32,9 @@ body {
     //Five rows is accurate??: 3 for Producers/Brokers/Consumers, 2 for the lines connecting them
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     background-color: rgb(224, 240, 255);
-    justify-content: space-evenly;
+    // justify-content: space-evenly;
+    align-content: space-between;
+    margin: auto;
 
     #producers {
       g {
@@ -48,6 +55,24 @@ body {
         display: flex;
         justify-content: space-evenly;
       }
+    }
+  }
+
+  #debug-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 1em 1em;
+
+    #debug-card {
+      flex: 1 0 21%;
+      background-color: rgb(255, 193, 193);
+      border: 2px solid orangered;
+      border-radius: 4px;
+      padding: 1em 1em;
+      margin: 1em 1em;
+      // display: inline;
     }
   }
 }
