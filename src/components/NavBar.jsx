@@ -11,10 +11,10 @@ class NavBar extends Component {
     return (
       <div id="nav-bar">
         <Link to="/" className="button is-primary">Main</Link>
-        <Link to="/vis"><button>Visualization</button></Link>
-        <Link to="/debug"><button>Debugging</button></Link>
-        <Link to="/options"><button>Options</button></Link>
-        <button onClick={() => {
+        <Link to="/vis" className="button is-primary">Visualization</Link>
+        <Link to="/debug" className="button is-primary">Debugging</Link>
+        <Link to="/options" className="button is-primary">Options</Link>
+        <button className="button is-primary" onClick={() => {
           electron.notificationApi.sendNotification('HELLO MATT AND GEORGE!');
         }}
         >Notify</button>

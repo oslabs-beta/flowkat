@@ -9,7 +9,7 @@ class OptionsContainer extends Component {
   render() {
     return (
       <div id="options-container">
-        <h1>This is the Options tab.</h1>
+        <h1 className="title is-1">This is the Options tab.</h1>
       </div>
     );
   };

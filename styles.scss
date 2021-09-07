@@ -1,25 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
-body {
-  // font-family: 'Open Sans', sans-serif;
-  // color: #CB63FF;
-}
-
 #app-container {
   display: grid;
-  width: 90%;
   grid-template-columns: 1fr 5fr;
-  border: 2px solid #CB63FF;
-  margin: auto;
 
   #nav-bar {
     display: grid;
-    // width: 90%;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    gap: 10em;
+    gap: 8.8em;
     align-content: space-between;
-    border: 1px solid #eac0ff;
+    padding: 4px;
+    align-items: center;
     background-color: #eac0ff;
 
     a {
@@ -37,17 +29,6 @@ body {
     // align-content: space-between;
     // margin: auto;
     padding: 1em 1em 1em 1em;
-    #producers {
-
-    }
-
-    #brokers {
-
-    }
-
-    #consumers {
-
-    }
   }
 
   #debug-container {
@@ -64,7 +45,6 @@ body {
       border-radius: 4px;
       padding: 1em 1em;
       margin: 1em 1em;
-      // display: inline;
     }
   }
 }

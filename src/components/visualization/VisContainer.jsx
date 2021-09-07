@@ -7,20 +7,25 @@ class VisContainer extends Component {
     super(props);
 
     this.state = {
-      producers: [
-        { name: 'prod1', cx: 50, cy: 50, connections: true },
-        { name: 'prod2', cx: 250, cy: 50, connections: false },
-        { name: 'prod3', cx: 450, cy: 50, connections: true },
-      ],
-      brokers: [
-        { name: 'broker1', x: 125, y: 290, connections: true},
-        { name: 'broker2', x: 325, y: 290, connections: true},
-      ],
-      consumers: [
-        { name: 'consumer1', cx: 50, cy: 600, connections: true},
-        { name: 'consumer2', cx: 250, cy: 600, connections: true},
-        { name: 'consumer3', cx: 450, cy: 600, connections: true},
-      ],
+      producers: {
+        producer1: { cx: 450, cy: 50, connections: true },
+        producer2: { cx: 650, cy: 50, connections: false },
+        producer3: {cx: 850, cy: 50, connections: true },
+      },
+      brokers: {
+        broker1: { x: 525, y: 290, connections: true},
+        broker2: { x: 725, y: 290, connections: true},
+      },
+      consumers: {
+        consumer1: { cx: 450, cy: 600, connections: true},
+        consumer2: { cx: 650, cy: 600, connections: true},
+        consumer3: { cx: 850, cy: 600, connections: true},
+      },
+      pipes: {
+        producer1: ['broker1', 'broker2'],
+        producer2: ['broker1'],
+        broker1: ['consumer1', 'consumer']
+      }
     }
   }
 

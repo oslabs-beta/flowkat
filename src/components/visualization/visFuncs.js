@@ -1,7 +1,7 @@
 const visFuncs = {
-  renderProsCons(arrProds) {
-    for (let i = 0; i < arrProds.length; i++) {
-      let currProducer = arrProds[i];
+  renderProsCons(proConsObj) {
+    Object.keys(proConsObj).forEach(proConKey => {
+      let currProducer = proConsObj[proConKey];
 
       let currCirc = d3.select('#svg-container')
       .append('circle')
@@ -11,12 +11,12 @@ const visFuncs = {
 
       if (currProducer.connections) currCirc.attr('fill', '#a7e8c2')
       else currCirc.attr('fill', 'darkgray')
-    }
+    })
   },
 
-  renderBrokers(arrBros) {
-    for (let i = 0; i < arrBros.length; i++) {
-      let currBroker = arrBros[i];
+  renderBrokers(brokersObj) {
+    Object.keys(brokersObj).forEach(brokerKey => {
+      let currBroker = brokersObj[brokerKey];
 
       let currSquare = d3.select('#svg-container')
       .append('rect')
@@ -27,11 +27,11 @@ const visFuncs = {
       .attr('rx', 10)
       .attr('ry', 10)
       .attr('fill', '#bb8fce')
-    }
+    })
   },
 
-  renderConsumers(arrCons) {
-    
+  renderPipes(fromArr, toArr) {
+
   }
 }
 
