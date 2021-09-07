@@ -1,5 +1,5 @@
 const visFuncs = {
-  renderProducers(arrProds) {
+  renderProsCons(arrProds) {
     for (let i = 0; i < arrProds.length; i++) {
       let currProducer = arrProds[i];
 
@@ -14,9 +14,9 @@ const visFuncs = {
     }
   },
 
-  renderBrokers(arrBrokers) {
-    for (let i = 0; i < arrBrokers.length; i++) {
-      let currBroker = arrBrokers[i];
+  renderBrokers(arrBros) {
+    for (let i = 0; i < arrBros.length; i++) {
+      let currBroker = arrBros[i];
 
       let currSquare = d3.select('#svg-container')
       .append('rect')
@@ -28,6 +28,10 @@ const visFuncs = {
       .attr('ry', 10)
       .attr('fill', '#bb8fce')
     }
+  },
+
+  renderConsumers(arrCons) {
+    
   }
 }
 

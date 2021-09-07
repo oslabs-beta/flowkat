@@ -17,7 +17,9 @@ class VisContainer extends Component {
         { name: 'broker2', x: 325, y: 290, connections: true},
       ],
       consumers: [
-
+        { name: 'consumer1', cx: 50, cy: 600, connections: true},
+        { name: 'consumer2', cx: 250, cy: 600, connections: true},
+        { name: 'consumer3', cx: 450, cy: 600, connections: true},
       ],
     }
   }
@@ -25,15 +27,15 @@ class VisContainer extends Component {
   componentDidMount() {
     console.log('VisContainer Mounted');
 
-    visFuncs.renderProducers(this.state.producers);
-
+    visFuncs.renderProsCons(this.state.producers);
     visFuncs.renderBrokers(this.state.brokers);
+    visFuncs.renderProsCons(this.state.consumers);
   }
 
   render() {
     return (
       <div id="vis-container">
-        <svg id="svg-container" width="80%" height="80%"></svg>
+        <svg id="svg-container" width="100%" height="100%"></svg>
         {/* <div id="prod-broke-pipes"></div> */}
         {/* <svg id="brokers"></svg> */}
         {/* <div id="broke-con-pipes"></div>

@@ -10,7 +10,7 @@ class NavBar extends Component {
   render() {
     return (
       <div id="nav-bar">
-        <Link to="/"><button>Main</button></Link>
+        <Link to="/" className="button is-primary">Main</Link>
         <Link to="/vis"><button>Visualization</button></Link>
         <Link to="/debug"><button>Debugging</button></Link>
         <Link to="/options"><button>Options</button></Link>
