@@ -27,34 +27,25 @@ body {
   }
 
   #vis-container {
-    display: grid;
+    // display: grid;
     // width: 90%;
     //Five rows is accurate??: 3 for Producers/Brokers/Consumers, 2 for the lines connecting them
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    // grid-template-rows: 1fr;
     background-color: rgb(224, 240, 255);
     // justify-content: space-evenly;
-    align-content: space-between;
+    // align-content: space-between;
     // margin: auto;
-
+    padding: 1em 1em 1em 1em;
     #producers {
-      g {
-        display: flex;
-        justify-content: space-evenly;
-      }
+
     }
 
     #brokers {
-      g {
-        display: flex;
-        justify-content: space-evenly;
-      }
+
     }
 
     #consumers {
-      g {
-        display: flex;
-        justify-content: space-evenly;
-      }
+
     }
   }
 

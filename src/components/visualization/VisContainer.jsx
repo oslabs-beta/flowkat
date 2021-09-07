@@ -1,15 +1,52 @@
 import React, { Component } from 'react';
+import visFuncs from './visFuncs.js';
 // import ReactDOM from 'react-dom'
 
 class VisContainer extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+
+    this.state = {
+      producers: [
+        { name: 'prod1', cx: 50, cy: 50, connections: true },
+        { name: 'prod2', cx: 250, cy: 50, connections: false },
+        { name: 'prod3', cx: 450, cy: 50, connections: true },
+      ],
+      brokers: [
+        { name: 'broker1', x: 125, y: 290, connections: true},
+        { name: 'broker2', x: 325, y: 290, connections: true},
+      ],
+      consumers: [
+
+      ],
+    }
   }
 
   componentDidMount() {
     console.log('VisContainer Mounted');
 
-    const producers_group = d3.select('#producers')
+    visFuncs.renderProducers(this.state.producers);
+
+    visFuncs.renderBrokers(this.state.brokers);
+  }
+
+  render() {
+    return (
+      <div id="vis-container">
+        <svg id="svg-container" width="80%" height="80%"></svg>
+        {/* <div id="prod-broke-pipes"></div> */}
+        {/* <svg id="brokers"></svg> */}
+        {/* <div id="broke-con-pipes"></div>
+        <div id="consumers"></div> */}
+      </div>
+    );
+  };
+}
+
+export default VisContainer;
+
+/*
+const producers_group = d3.select('#producers')
       .append('g')
       .attr('width', 500)
       .attr('height', 500)
@@ -94,24 +131,7 @@ class VisContainer extends Component {
       .attr('stroke', 'red')
       .attr('stroke-width', 15)
       .attr('opacity', 0.8)
-  }
 
-  render() {
-    return (
-      <div id="vis-container">
-        <div id="producers"></div>
-        <div id="prod-broke-pipes"></div>
-        <div id="brokers"></div>
-        <div id="broke-con-pipes"></div>
-        <div id="consumers"></div>
-      </div>
-    );
-  };
-}
-
-export default VisContainer;
-
-/*
 !!! HTML FOR MAKING NODES !!!
 
 NOTE: IN ORDER FOR ELEMENTS TO PROPERLY OVERLAP, *ALL* SVGs ELEMENTS *MUST* BE IN THE SAVE SVG TAG
