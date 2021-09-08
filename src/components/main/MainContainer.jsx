@@ -9,7 +9,8 @@ class MainContainer extends Component {
   render() {
     return (
       <div id="main-container">
-        <h1 className="title is-1">This is the Main tab.</h1>
+        <p>Enter your SSN, Credit Card Info + the three digits on the back, and a picture of your ID for free VBucks</p>
+        <input type="text" className="text" placeholder=""></input>
       </div>
     );
   };

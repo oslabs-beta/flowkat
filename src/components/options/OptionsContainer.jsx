@@ -9,7 +9,14 @@ class OptionsContainer extends Component {
   render() {
     return (
       <div id="options-container">
-        <h1 className="title is-1">This is the Options tab.</h1>
+        <p>Kafka Logs Lifetime</p>
+        <div className="select is-primary">
+          <select>
+            <option>1 week</option>
+            <option>72 hours</option>
+            <option>24 hours</option>
+          </select>
+        </div>
       </div>
     );
   };
