@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+// @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+$primary: #808CC8;
+@import "./node_modules/bulma/bulma.sass";
 
 #app-container {
-  $primary: #808CC8;
   display: grid;
   grid-template-columns: 1fr 5fr;
 
