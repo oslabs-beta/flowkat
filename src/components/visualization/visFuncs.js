@@ -8,13 +8,15 @@ const visFuncs = {
     const nodeHorizontalSpacing = 125;
     
     let currX = centerX - (nodeHorizontalSpacing * nodesEachSide);
-
+    if (numOfNodes % 2 === 0) currX = currX - Math.floor(currX / 2);
     for (const name of Object.keys(nodeObj)) {
       if (numOfNodes % 2 !== 0) {
         nodeObj[name].cx = currX;
         currX += nodeHorizontalSpacing;
       } else {
         console.log('numOfNodes even!')
+        nodeObj[name].cx = currX;
+        currX += nodeHorizontalSpacing;
       }
     }
 
