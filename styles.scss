@@ -24,7 +24,7 @@
     // width: 90%;
     //Five rows is accurate??: 3 for Producers/Brokers/Consumers, 2 for the lines connecting them
     // grid-template-rows: 1fr;
-    background-color: rgb(224, 240, 255);
+    background-color: white;//rgb(224, 240, 255);
     // justify-content: space-evenly;
     // align-content: space-between;
     // margin: auto;
@@ -48,9 +48,15 @@
     }
   }
 
+  .title {
+    margin: auto;
+  }
+
   #options-container {
     width: 80%;
     height: 80%;
     margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }

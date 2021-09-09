@@ -10,7 +10,7 @@ class VisContainer extends Component {
       producers: {
         producer1: { cx: 450, cy: 50, connections: true },
         producer2: { cx: 650, cy: 50, connections: false },
-        producer3: {cx: 850, cy: 50, connections: true },
+        producer3: { cx: 850, cy: 50, connections: true },
       },
       brokers: {
         broker1: { x: 525, y: 290, connections: true},
@@ -25,16 +25,41 @@ class VisContainer extends Component {
         producer1: ['broker1', 'broker2'],
         producer2: ['broker1'],
         broker1: ['consumer1', 'consumer']
-      }
+      },
+      svgWidth: null,
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    //MAXIMUM WIDTH OF svg CONTAINER: 1234
     console.log('VisContainer Mounted');
 
-    visFuncs.renderProsCons(this.state.producers);
-    visFuncs.renderBrokers(this.state.brokers);
-    visFuncs.renderProsCons(this.state.consumers);
+    // if (this.state.svgWidth === null) {
+    //   this.setState({
+    //     svgWidth: document.getElementById('svg-container').clientWidth,
+    //   }, () => {
+    //     console.log('setState callback logs:', this.state.svgWidth);
+    //   });
+    // } else {
+    //   console.log(this.state.producers);
+    // }
+
+    await this.setState({
+      svgWidth: document.getElementById('svg-container').clientWidth,
+    }, () => {
+      console.log('setState callback logs:', this.state.svgWidth);
+    });
+    
+    //will calculate x coords and then render the svgs
+    await this.setState({
+      producers: visFuncs.calcXCoords(this.state.producers, this.state.svgWidth),
+      // brokers: visFuncs.calcXCoords(this.state.brokers, this.state.svgWidth),
+      consumers: visFuncs.calcXCoords(this.state.consumers, this.state.svgWidth),
+    }, () => {
+      visFuncs.renderProds(this.state.producers);
+      visFuncs.renderBrokers(this.state.brokers);
+      visFuncs.renderCons(this.state.consumers);   
+    }) 
   }
 
   render() {

@@ -7,6 +7,7 @@
     "start": "dbus-launch electron .",
     "watch": "webpack --config webpack.common.js --watch",
     "noreload": "concurrently \"webpack --config webpack.common.js --watch\" \"dbus-launch electron .\"",
+    "go": "webpack --config webpack.common.js --watch && electron .",
     "test": ""
   },
   "keywords": [],
