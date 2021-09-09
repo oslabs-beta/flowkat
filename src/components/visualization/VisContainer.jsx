@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import visFuncs from './visFuncs.js';
 // import ReactDOM from 'react-dom'
+// import { path } from 'path';
 
 class VisContainer extends Component {
   constructor(props) {
@@ -8,23 +9,18 @@ class VisContainer extends Component {
 
     this.state = {
       producers: {
-        producer1: { cx: 450, cy: 50, connections: true },
-        producer2: { cx: 650, cy: 50, connections: false },
-        producer3: { cx: 850, cy: 50, connections: true },
+        producer1: { cy: 50, connections: ['broker1', 'broker2'] },
+        producer2: { cy: 50, connections: [] },
+        producer3: { cy: 50, connections: ['broker1'] },
       },
       brokers: {
-        broker1: { x: 525, y: 290, connections: true},
-        broker2: { x: 725, y: 290, connections: true},
+        broker1: { y: 290, connections: ['consumer1', 'consumer3']},
+        broker2: { y: 290, connections: ['consumer2']},
       },
       consumers: {
-        consumer1: { cx: 450, cy: 600, connections: true},
-        consumer2: { cx: 650, cy: 600, connections: true},
-        consumer3: { cx: 850, cy: 600, connections: true},
-      },
-      pipes: {
-        producer1: ['broker1', 'broker2'],
-        producer2: ['broker1'],
-        broker1: ['consumer1', 'consumer']
+        consumer1: { cy: 600 },
+        consumer2: { cy: 600 },
+        consumer3: { cy: 600 },
       },
       svgWidth: null,
     }
@@ -52,14 +48,15 @@ class VisContainer extends Component {
     
     //will calculate x coords and then render the svgs
     await this.setState({
-      producers: visFuncs.calcXCoords(this.state.producers, this.state.svgWidth),
-      // brokers: visFuncs.calcXCoords(this.state.brokers, this.state.svgWidth),
-      consumers: visFuncs.calcXCoords(this.state.consumers, this.state.svgWidth),
+      producers: visFuncs.calcXCoords(this.state.producers, this.state.svgWidth, 'producer'),
+      brokers: visFuncs.calcXCoords(this.state.brokers, this.state.svgWidth, 'broker'),
+      consumers: visFuncs.calcXCoords(this.state.consumers, this.state.svgWidth, 'consumer'),
     }, () => {
       visFuncs.renderProds(this.state.producers);
       visFuncs.renderBrokers(this.state.brokers);
-      visFuncs.renderCons(this.state.consumers);   
-    }) 
+      visFuncs.renderCons(this.state.consumers);
+      visFuncs.renderPipes(this.state);
+    });
   }
 
   render() {

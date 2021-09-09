@@ -10,7 +10,7 @@ class OptionsContainer extends Component {
     return (
       <div id="options-container">
         <div>
-          <p>Kafka Logs Lifetime</p>
+          <p>Node Configuration History Lifetime</p>
           <div className="select is-primary">
             <select>
               <option>1 week</option>

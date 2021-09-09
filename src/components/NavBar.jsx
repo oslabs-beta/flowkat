@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import ReactDOM from 'react-dom'
+// import { path } from 'path';
 
 class NavBar extends Component {
   constructor(props) {
@@ -10,7 +11,10 @@ class NavBar extends Component {
   render() {
     return (
       <div id="nav-bar">
-        {/* <img src={path.resolve(__dirname, '../static/FlowKatIconLarge.png')}/> */}
+        {/* <img src="https://cdn.discordapp.com/attachments/879428128282407013/885637964430999552/FlowKatIconLarge.png"
+          height = '32'
+          width = '32'
+        /> */}
         <Link to="/" className="button is-primary">Main</Link>
         <Link to="/vis" className="button is-primary">Visualization</Link>
         <Link to="/debug" className="button is-primary">Debugging</Link>

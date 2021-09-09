@@ -22,6 +22,7 @@
     "css-loader": "^6.2.0",
     "electron": "^14.0.0",
     "electron-reload": "^2.0.0-alpha.1",
+    "nodemon": "^2.0.12",
     "sass": "^1.39.0",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
