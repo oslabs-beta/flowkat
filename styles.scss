@@ -4,10 +4,16 @@
 $primary: #808CC8;
 @import "./node_modules/bulma/bulma.sass";
 
+.button {
+  // border: 1px solid black;
+  // border-radius: 4px;
+  border: 9px solid #002aff;
+  box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
+}
+
 #app-container {
   display: grid;
   grid-template-columns: 1fr 5fr;
-
   #nav-bar {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
