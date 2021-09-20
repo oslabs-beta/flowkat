@@ -1,0 +1,40 @@
+{
+  "name": "electron-katflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "dbus-launch electron .",
+    "watch": "webpack --config webpack.common.js --watch",
+    "noreload": "concurrently \"webpack --config webpack.common.js --watch\" \"dbus-launch electron .\"",
+    "go": "webpack --config webpack.common.js --watch && electron .",
+    "test": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.2.1",
+    "css-loader": "^6.2.0",
+    "electron": "^14.0.0",
+    "electron-reload": "^2.0.0-alpha.1",
+    "nodemon": "^2.0.12",
+    "sass": "^1.39.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.52.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "dependencies": {
+    "bulma": "^0.9.3",
+    "electron-builder": "^22.11.7",
+    "kafkajs": "^1.15.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.0"
+  }
+}
