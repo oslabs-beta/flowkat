@@ -21,10 +21,14 @@ class App extends Component {
       connectStatus: 'none',
       clusterInfo: null,
       topics: null,
+
+      prometheusAddress: '',
     }
 
     this.updateBrokerAddress = this.updateBrokerAddress.bind(this);
     this.attemptConnect = this.attemptConnect.bind(this);
+
+    this.updatePrometheusAddress = this.updatePrometheusAddress.bind(this);
   }
 
   // Attempt to connect to Kafka on user submission
@@ -51,6 +55,10 @@ class App extends Component {
     this.setState({ brokerAddress: address });
   }
 
+  updatePrometheusAddress(address) {
+    this.setState({ prometheusAddress: address });
+  }
+
   render() {
     return (
       <Router>
@@ -62,13 +70,13 @@ class App extends Component {
               <VisContainer/>
             </Route>
             <Route exact path="/debug">
-              <DebuggingContainer/>
+              <DebuggingContainer prometheusAddress={this.state.prometheusAddress}/>
             </Route>
             <Router exact path="/options">
               <OptionsContainer/>
             </Router>
             <Router path="/">
-              <MainContainer state={this.state} attemptConnect={this.attemptConnect} />
+              <MainContainer state={this.state} attemptConnect={this.attemptConnect} updatePrometheus={this.updatePrometheusAddress}/>
             </Router>
           </Switch>
         </div>
