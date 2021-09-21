@@ -1,16 +1,18 @@
-const { ipcRenderer, contextBridge } = require('electron');
+//LEAVE ALONE FOR NOW
 
-contextBridge.exposeInMainWorld('electron', {
-  notificationApi: {
-    sendNotification(message) {
-      console.log(message);
-      ipcRenderer.send('notify', message);
-    }
-  },
-  batteryApi: {
+// const { ipcRenderer, contextBridge } = require('electron');
 
-  },
-  filesApi: {
+// contextBridge.exposeInMainWorld('electron', {
+//   notificationApi: {
+//     sendNotification(message) {
+//       console.log(message);
+//       ipcRenderer.send('notify', message);
+//     }
+//   },
+//   batteryApi: {
 
-  }
-})
+//   },
+//   filesApi: {
+
+//   }
+// })
