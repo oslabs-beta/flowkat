@@ -10,6 +10,8 @@ class MainContainer extends Component {
  
   render() {
     let address = '';
+    let promAddress = '';
+
     return (
       <div id="main-container">
         <p>Enter the address and port of your Kafka broker in the format <i>address</i>:<i>port</i></p>
@@ -18,6 +20,13 @@ class MainContainer extends Component {
         <p>Kafka broker address: {this.props.state.brokerAddress}</p>
         <KafkaConnect connectStatus={this.props.state.connectStatus} />
         <KafkaCluster clusterInfo={this.props.state.clusterInfo} topics={this.props.state.topics}/>
+        
+        <br></br>
+
+        <p>Enter the address and port of your Prometheus instance in the format <i>address:port</i></p>
+        <input type="text" className="text" placeholder="Ex: localhost:9090" onChange={(e) => promAddress = e.target.value}></input>
+        <button onClick={() => this.props.updatePrometheus(promAddress)}>Submit</button>
+        <p>Prometheus address: {this.props.state.prometheusAddress}</p>
       </div>
     );
   };
