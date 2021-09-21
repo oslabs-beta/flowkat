@@ -24,7 +24,7 @@ class DebuggingContainer extends Component {
   render() {
     return (
       <div id="debug-container">
-        <DropdownMenu/>
+        <DropdownMenu prometheusAddress={this.props.prometheusAddress}/>
         <Plot
           data ={[
             {

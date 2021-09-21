@@ -9,6 +9,7 @@ const DropdownMenu = () => {
     const onClickQuery = (e) =>{
         console.log(e.target.value)
         setQuery(e.target.value);
+        []
     }
     useEffect(() => {
         const pageClickEvent = (e) => {
