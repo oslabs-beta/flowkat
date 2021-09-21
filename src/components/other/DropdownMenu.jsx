@@ -28,7 +28,7 @@ const DropdownMenu = () => {
         }
       
       }, [isActive]);
-      
+
       return (
         <div className="menu-container">
           <button onClick={onClick} className="menu-trigger">
@@ -52,3 +52,5 @@ const DropdownMenu = () => {
         </div>
       );
     };
+ 
+export default DropdownMenu;
