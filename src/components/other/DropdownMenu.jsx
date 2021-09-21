@@ -1,7 +1,7 @@
 import React, { Component, useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
-const DropdownMenu = () => {
+const DropdownMenu = (props) => {
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useState(false);
     const [query, setQuery] = useState('');
@@ -38,7 +38,7 @@ const DropdownMenu = () => {
           </button>
           <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
             <ul>
-              <li><button onClick={onClickQuery} className="menu-trigger" value={`http://${this.props.prometheusAddress}/api/v1/query?query=kafka_cluster_partition_underreplicated`}>kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={onClickQuery} className="menu-trigger" value={`http://${props.prometheusAddress}/api/v1/query?query=kafka_cluster_partition_underreplicated`}>kafka_cluster_partition_underreplicated</button></li>
               <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
               <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
               <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
@@ -53,5 +53,7 @@ const DropdownMenu = () => {
         </div>
       );
     };
+
+    //value={`http://${this.props.prometheusAddress}/api/v1/query?query=kafka_cluster_partition_underreplicated`}
  
 export default DropdownMenu;
