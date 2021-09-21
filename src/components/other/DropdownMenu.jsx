@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 const DropdownMenu = (props) => {
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useState(false);
-    const [query, setQuery] = useState('');
+    //const [query, setQuery] = useState('');
     const onClick = () => setIsActive(!isActive);
-    const onClickQuery = (e) =>{
-        console.log(e.target.value)
-        setQuery(e.target.value);
-        []
-    }
+    // const onClickQuery = (e) =>{
+    //     console.log(e.target.value)
+    //     setQuery(e.target.value);
+        
+    // }
     useEffect(() => {
         const pageClickEvent = (e) => {
             // If the active element exists and is clicked outside of
@@ -38,16 +38,16 @@ const DropdownMenu = (props) => {
           </button>
           <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
             <ul>
-              <li><button onClick={onClickQuery} className="menu-trigger" value={`http://${props.prometheusAddress}/api/v1/query?query=kafka_cluster_partition_underreplicated`}>kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value={`http://${props.prometheusAddress}/api/v1/query?query=kafka_cluster_partition_underreplicated`}>kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={props.onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
             </ul>
           </nav>
         </div>

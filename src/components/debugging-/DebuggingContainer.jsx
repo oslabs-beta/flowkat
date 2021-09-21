@@ -10,12 +10,19 @@ class DebuggingContainer extends Component {
 
     this.state = {
       xData: [],
+      queryString: '',
     }
+    this.onClickQuery = this.onClickQuery.bind(this);
+  }
+
+  onClickQuery(event){
+    console.log(event.target.value)
+    this.setState({queryString: event.target.value})
   }
 
   componentDidMount() {
     try {
-      fetch(prometheusAddress + '')
+      fetch(queryString)
     } catch (e) {
       console.log(e);
     }
@@ -24,7 +31,10 @@ class DebuggingContainer extends Component {
   render() {
     return (
       <div id="debug-container">
-        <DropdownMenu prometheusAddress={this.props.prometheusAddress}/>
+        <DropdownMenu 
+          prometheusAddress={this.props.prometheusAddress}
+          onClickQuery={this.onClickQuery}
+          />
         <Plot
           data ={[
             {
