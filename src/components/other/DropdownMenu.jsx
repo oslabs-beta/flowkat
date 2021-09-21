@@ -37,7 +37,7 @@ const DropdownMenu = () => {
           </button>
           <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
             <ul>
-              <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
+              <li><button onClick={onClickQuery} className="menu-trigger" value={`http://${this.props.prometheusAddress}/api/v1/query?query=kafka_cluster_partition_underreplicated`}>kafka_cluster_partition_underreplicated</button></li>
               <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
               <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
               <li><button onClick={onClickQuery} className="menu-trigger" value="kafka_cluster_partition_underreplicated">kafka_cluster_partition_underreplicated</button></li>
