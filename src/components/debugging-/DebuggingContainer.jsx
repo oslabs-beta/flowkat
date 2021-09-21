@@ -12,6 +12,21 @@ class DebuggingContainer extends Component {
     }
   }
 
+componentDidMount() {
+  //call fetch request to populate cardsToRender arr
+  fetch("http://localhost:9090/api/v1/query?query=kafka_cluster_partition_underreplicated")
+  .then((data) => data.json())
+  .then((res) => res.data.result)
+  .then((arr) => {
+    console.log(arr);
+    // arr.forEach((obj) => {
+    //   // console.log(obj);
+    //   console.log(obj['value']['1']);
+    //   this.cardsToRender.push(<div>{'Hi'/*obj['value']['0']*/}</div>);
+      
+    // });
+
+    
   render() {
     let cardsToRender = [
       <DebugCard
