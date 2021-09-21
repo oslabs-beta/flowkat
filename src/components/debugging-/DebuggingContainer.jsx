@@ -6,6 +6,10 @@ import DebugCard from './DebuggingCard.jsx';
 class DebuggingContainer extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      data: [],
+    }
   }
 
   render() {
