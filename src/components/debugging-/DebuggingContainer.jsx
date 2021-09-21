@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Plot from 'react-plotly.js';
 // import ReactDOM from 'react-dom'
 import DebugCard from './DebuggingCard.jsx';
 
@@ -23,7 +24,21 @@ class DebuggingContainer extends Component {
 
     return (
       <div id="debug-container">
-        {cardsToRender}
+        <Plot
+          data ={[
+            {
+              x: [1, 2, 3],
+              y: [1, 8, 27],
+              type: 'bar',
+            },
+          ]}
+
+          layout = {{
+            width: 800,
+            height: 600,
+            title: 'x^3',
+          }}
+        />
       </div>
     );
   };
