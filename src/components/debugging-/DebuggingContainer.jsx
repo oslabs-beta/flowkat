@@ -25,28 +25,27 @@ componentDidMount() {
     //   this.cardsToRender.push(<div>{'Hi'/*obj['value']['0']*/}</div>);
       
     // });
+    let newData = [];
+    arr.forEach(obj => {
+      newData.push(
+        <p>{obj['value']['0']}</p>
+      );
+    })
+    this.setState({
+      data: newData,
+    });
+  })
+}
 
-    
-  render() {
-    let cardsToRender = [
-      <DebugCard
-        errortype = {'Producer could not communicate with broker!'}
-        nodesinvolved = {['Service 1', 'Broker 1']}
-        key = {`debugcard${1}`}
-      />,
-      <DebugCard
-        errortype = {'Broker could not communicate with consumer!'}
-        nodesinvolved = {['Broker 2', 'Service 3']}
-        key = {`debugcard${2}`}
-      />,
-    ];
-
-    return (
-      <div id="debug-container">
-        {cardsToRender}
-      </div>
-    );
-  };
+render() {
+  return (
+    <div id="debug-container">
+      <DropdownMenu></DropdownMenu>
+      {this.state.data}
+      {/* <p>{`${data1}`}</p> */}
+    </div>
+  );
+};
 }
 
 export default DebuggingContainer;
