@@ -11,9 +11,23 @@ $primary: #808CC8;
   box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
 }
 
+table {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  width: 700px;
+  height: 700px;
+  display: flex;
+}
+
+tr {
+  max-width: 50%;
+  // max-height: 20%;
+}
+
 #app-container {
   display: grid;
   grid-template-columns: 1fr 5fr;
+  
   #nav-bar {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
