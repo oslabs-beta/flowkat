@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import visFuncs from './visFuncs.js';
+import consumeAllMessages from '../../kafka/consumeAllMessages.js';
+import getTopicMessages from '../../kafka/getTopicMessages.js';
 // import ReactDOM from 'react-dom'
 // import { path } from 'path';
 
@@ -7,28 +9,40 @@ class VisContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      producers: {
-        producer1: { cy: 50, connections: ['broker1', 'broker2'] },
-        producer2: { cy: 50, connections: [] },
-        producer3: { cy: 50, connections: ['broker1'] },
-      },
-      brokers: {
-        broker1: { y: 290, connections: ['consumer1', 'consumer3']},
-        broker2: { y: 290, connections: ['consumer2']},
-      },
-      consumers: {
-        consumer1: { cy: 600 },
-        consumer2: { cy: 600 },
-        consumer3: { cy: 600 },
-      },
-      svgWidth: null,
-    }
+    // this.state = {
+    //   producers: {
+    //     producer1: { cy: 50, connections: ['broker1', 'broker2'] },
+    //     producer2: { cy: 50, connections: [] },
+    //     producer3: { cy: 50, connections: ['broker1'] },
+    //   },
+    //   brokers: {
+    //     broker1: { y: 290, connections: ['consumer1', 'consumer3']},
+    //     broker2: { y: 290, connections: ['consumer2']},
+    //   },
+    //   consumers: {
+    //     consumer1: { cy: 600 },
+    //     consumer2: { cy: 600 },
+    //     consumer3: { cy: 600 },
+    //   },
+    //   svgWidth: null,
+    // }
   }
 
   async componentDidMount() {
     //MAXIMUM WIDTH OF svg CONTAINER: 1234
     console.log('VisContainer Mounted');
+
+    if (this.props.state.connectStatus === 'success') {
+      console.log('Trying to consume Kafka messages...');
+      const users = []
+      // await this.props.state.topics.forEach(async topic => {
+      //   console.log(`Topic: ${topic}`);
+      //   await getTopicMessages(this.props.state.brokerAddress, topic);
+      // });
+      await getTopicMessages(this.props.state.brokerAddress, 'pancake', users);
+      setTimeout(() => console.log(users), 3000);
+      // consumeAllMessages(this.props.state.brokerAddress, this.props.state.topics);
+    }
 
     // if (this.state.svgWidth === null) {
     //   this.setState({
@@ -40,35 +54,41 @@ class VisContainer extends Component {
     //   console.log(this.state.producers);
     // }
 
-    await this.setState({
-      svgWidth: document.getElementById('svg-container').clientWidth,
-    }, () => {
-      console.log('setState callback logs:', this.state.svgWidth);
-    });
+  //   await this.setState({
+  //     svgWidth: document.getElementById('svg-container').clientWidth,
+  //   }, () => {
+  //     console.log('setState callback logs:', this.state.svgWidth);
+  //   });
     
-    //will calculate x coords and then render the svgs
-    await this.setState({
-      producers: visFuncs.calcXCoords(this.state.producers, this.state.svgWidth, 'producer'),
-      brokers: visFuncs.calcXCoords(this.state.brokers, this.state.svgWidth, 'broker'),
-      consumers: visFuncs.calcXCoords(this.state.consumers, this.state.svgWidth, 'consumer'),
-    }, () => {
-      visFuncs.renderProds(this.state.producers);
-      visFuncs.renderBrokers(this.state.brokers);
-      visFuncs.renderCons(this.state.consumers);
-      visFuncs.renderPipes(this.state);
-    });
+  //   //will calculate x coords and then render the svgs
+  //   await this.setState({
+  //     producers: visFuncs.calcXCoords(this.state.producers, this.state.svgWidth, 'producer'),
+  //     brokers: visFuncs.calcXCoords(this.state.brokers, this.state.svgWidth, 'broker'),
+  //     consumers: visFuncs.calcXCoords(this.state.consumers, this.state.svgWidth, 'consumer'),
+  //   }, () => {
+  //     visFuncs.renderProds(this.state.producers);
+  //     visFuncs.renderBrokers(this.state.brokers);
+  //     visFuncs.renderCons(this.state.consumers);
+  //     visFuncs.renderPipes(this.state);
+  //   });
+  // }
   }
 
   render() {
     return (
-      <div id="vis-container">
-        <svg id="svg-container" width="100%" height="100%"></svg>
-        {/* <div id="prod-broke-pipes"></div> */}
-        {/* <svg id="brokers"></svg> */}
-        {/* <div id="broke-con-pipes"></div>
-        <div id="consumers"></div> */}
+      <div>
+        <p>Hello, Kafka! Check the console logs!</p>
       </div>
     );
+    // return (
+    //   <div id="vis-container">
+    //     <svg id="svg-container" width="100%" height="100%"></svg>
+    //     {/* <div id="prod-broke-pipes"></div> */}
+    //     {/* <svg id="brokers"></svg> */}
+    //     {/* <div id="broke-con-pipes"></div>
+    //     <div id="consumers"></div> */}
+    //   </div>
+    // );
   };
 }
 
