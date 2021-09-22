@@ -39,7 +39,7 @@ class VisContainer extends Component {
       //   console.log(`Topic: ${topic}`);
       //   await getTopicMessages(this.props.state.brokerAddress, topic);
       // });
-      await getTopicMessages(this.props.state.brokerAddress, 'Users', users);
+      await getTopicMessages(this.props.state.brokerAddress, 'pancake', users);
       setTimeout(() => console.log(users), 3000);
       // consumeAllMessages(this.props.state.brokerAddress, this.props.state.topics);
     }
