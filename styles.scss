@@ -32,7 +32,7 @@ $primary: #808CC8;
     background-color: #F7ECCA;
   }
 
-  #vis-container {
+  #messages-container {
     // display: grid;
     // width: 90%;
     //Five rows is accurate??: 3 for Producers/Brokers/Consumers, 2 for the lines connecting them
@@ -44,22 +44,13 @@ $primary: #808CC8;
     padding: 1em 1em 1em 1em;
   }
 
-  #debug-container {
+  #metrics-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: flex-start;
     padding: 1em 1em;
     background-color: #F7ECCA;
-
-    #debug-card {
-      flex: 1 0 21%;
-      background-color: rgb(255, 193, 193);
-      border: 2px solid orangered;
-      border-radius: 4px;
-      padding: 1em 1em;
-      margin: 1em 1em;
-    }
   }
 
   .title {

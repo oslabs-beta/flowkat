@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Plot from 'react-plotly.js';
-// import ReactDOM from 'react-dom'
-import DebugCard from './DebuggingCard.jsx';
 import DropdownMenu from '../other/DropdownMenu.jsx';
 
-class DebuggingContainer extends Component {
+class MetricsContainer extends Component {
   constructor(props) {
     super(props)
 
@@ -25,7 +23,12 @@ class DebuggingContainer extends Component {
 
   onClickQuery(event){
     console.log(event.target.value)
-    this.setState({currMetric: event.target.value})
+    this.setState({
+      currMetric: event.target.value,
+    });
+    this.setState({
+      fetchedLatest: false,
+    })
   }
 
   fetchGraph() {
@@ -103,7 +106,7 @@ class DebuggingContainer extends Component {
 
   render() {
     return (
-      <div id="debug-container">
+      <div id="metrics-container">
         <DropdownMenu 
           prometheusAddress={this.props.prometheusAddress}
           onClickQuery={this.onClickQuery}
@@ -132,7 +135,7 @@ class DebuggingContainer extends Component {
   };
 }
 
-export default DebuggingContainer;
+export default MetricsContainer;
 
 /* FETCHING DATA FROM PROMETHEUS
     //call fetch request to populate cardsToRender arr
