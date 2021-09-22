@@ -25,7 +25,12 @@ class DebuggingContainer extends Component {
 
   onClickQuery(event){
     console.log(event.target.value)
-    this.setState({currMetric: event.target.value})
+    this.setState({
+      currMetric: event.target.value,
+    });
+    this.setState({
+      fetchedLatest: false,
+    })
   }
 
   fetchGraph() {
