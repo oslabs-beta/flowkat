@@ -12,7 +12,7 @@ class MetricsContainer extends Component {
       yData: [],
       startTime: (Date.now() / 1000) - 3600,
       endTime: Date.now() / 1000,
-      step: 25,
+      step: 20,
       fetchedLatest: false,
       queryString: '',
     }
@@ -33,14 +33,18 @@ class MetricsContainer extends Component {
 
   fetchGraph() {
     console.log(`Fetching graph for ${this.state.currMetric}`);
+    
+    let fetchURL = 'http://' + `${this.props.prometheusAddress}` + '/api/v1/query_range?query=' + this.state.currMetric + '&start=' + `${this.state.startTime}` + '&end=' + `${this.state.endTime}` + '&step=' + `${this.state.step}`
+    console.log(fetchURL);
+
     try {
       // fetch('http://' + `${this.props.prometheusAddress}` + '/api/v1/query_range?query=kafka_controller_kafkacontroller_globaltopiccount&start=1632244155.671&end=1632251355.671&step=28')
-      fetch(
-        'http://' + `${this.props.prometheusAddress}` + 
-        '/api/v1/query_range?query=' + this.state.currMetric + 
-        '&start=' + `${this.state.startTime}` + 
-        '&end=' + `${this.state.endTime}` + 
-        '&step=' + `${this.state.step}`
+      fetch( fetchURL
+        // 'http://' + `${this.props.prometheusAddress}` + 
+        // '/api/v1/query_range?query=' + this.state.currMetric + 
+        // '&start=' + `${this.state.startTime}` + 
+        // '&end=' + `${this.state.endTime}` + 
+        // '&step=' + `${this.state.step}`
       )
       .then(res => res.json())
       .then(res => res['data']['result'][0]['values'])
@@ -50,9 +54,11 @@ class MetricsContainer extends Component {
         let newX = [];
         let newY = [];
 
+        let latestTimeInSec = array[array.length - 1][0]
+
         array.forEach(arr => {
-          newX.push(Number(arr[0]))
-          newY.push(Number(arr[1]))
+          newX.push( (Number(arr[0]) - latestTimeInSec) / 3600);
+          newY.push(Number(arr[1]));
         });
 
         console.log(newX);
