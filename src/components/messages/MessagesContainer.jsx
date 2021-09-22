@@ -1,13 +1,77 @@
 import React, { Component } from 'react';
-import visFuncs from './visFuncs.js';
-// import ReactDOM from 'react-dom'
-// import { path } from 'path';
+import TableRows from './TableRows';
 
-class VisContainer extends Component {
+class MessagesContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      messages: [
+        {
+          message: 'Here is a message',
+          timestamp: `${Date.now()}`,
+          topic: 'Users',
+          partition: '0',
+        }
+      ],
+    }
+  }
+
+  componentDidMount() {
+    console.log('MessagesContainer Mounted');
+    // let rowsToRender = []
+  }
+
+  render() {
+    let rowsToRender = [];
+
+    for (let i = 0; i < 100; i++) {
+      rowsToRender.push(
+        <TableRows
+          messageContent = {messagesArr[i]['message']}
+          timeStamp = {messageArr[i]['timeStamp']}
+          topicName = {messageArr[i]['topic']}
+          partition = {messageArr[i]['partition']}
+        />
+      )
+    }
+
+    return (
+      <div id="messages-container">
+        <table className="table" id="messages-table">
+          <thead>
+            <td>Message Content</td>
+            <td>Timestamp</td>
+            <td>Topic</td>
+          </thead>
+          <tbody>
+            {/* Custom component goes here */}
+            {rowsToRender}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+}
+
+export default MessagesContainer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
       producers: {
         producer1: { cy: 50, connections: ['broker1', 'broker2'] },
         producer2: { cy: 50, connections: [] },
@@ -23,58 +87,35 @@ class VisContainer extends Component {
         consumer3: { cy: 600 },
       },
       svgWidth: null,
-    }
-  }
 
-  async componentDidMount() {
-    //MAXIMUM WIDTH OF svg CONTAINER: 1234
-    console.log('VisContainer Mounted');
+    // // if (this.state.svgWidth === null) {
+    // //   this.setState({
+    // //     svgWidth: document.getElementById('svg-container').clientWidth,
+    // //   }, () => {
+    // //     console.log('setState callback logs:', this.state.svgWidth);
+    // //   });
+    // // } else {
+    // //   console.log(this.state.producers);
+    // // }
 
-    // if (this.state.svgWidth === null) {
-    //   this.setState({
-    //     svgWidth: document.getElementById('svg-container').clientWidth,
-    //   }, () => {
-    //     console.log('setState callback logs:', this.state.svgWidth);
-    //   });
-    // } else {
-    //   console.log(this.state.producers);
-    // }
-
-    await this.setState({
-      svgWidth: document.getElementById('svg-container').clientWidth,
-    }, () => {
-      console.log('setState callback logs:', this.state.svgWidth);
-    });
+    // await this.setState({
+    //   svgWidth: document.getElementById('svg-container').clientWidth,
+    // }, () => {
+    //   console.log('setState callback logs:', this.state.svgWidth);
+    // });
     
-    //will calculate x coords and then render the svgs
-    await this.setState({
-      producers: visFuncs.calcXCoords(this.state.producers, this.state.svgWidth, 'producer'),
-      brokers: visFuncs.calcXCoords(this.state.brokers, this.state.svgWidth, 'broker'),
-      consumers: visFuncs.calcXCoords(this.state.consumers, this.state.svgWidth, 'consumer'),
-    }, () => {
-      visFuncs.renderProds(this.state.producers);
-      visFuncs.renderBrokers(this.state.brokers);
-      visFuncs.renderCons(this.state.consumers);
-      visFuncs.renderPipes(this.state);
-    });
-  }
+    // //will calculate x coords and then render the svgs
+    // await this.setState({
+    //   producers: visFuncs.calcXCoords(this.state.producers, this.state.svgWidth, 'producer'),
+    //   brokers: visFuncs.calcXCoords(this.state.brokers, this.state.svgWidth, 'broker'),
+    //   consumers: visFuncs.calcXCoords(this.state.consumers, this.state.svgWidth, 'consumer'),
+    // }, () => {
+    //   visFuncs.renderProds(this.state.producers);
+    //   visFuncs.renderBrokers(this.state.brokers);
+    //   visFuncs.renderCons(this.state.consumers);
+    //   visFuncs.renderPipes(this.state);
+    // });
 
-  render() {
-    return (
-      <div id="vis-container">
-        <svg id="svg-container" width="100%" height="100%"></svg>
-        {/* <div id="prod-broke-pipes"></div> */}
-        {/* <svg id="brokers"></svg> */}
-        {/* <div id="broke-con-pipes"></div>
-        <div id="consumers"></div> */}
-      </div>
-    );
-  };
-}
-
-export default VisContainer;
-
-/*
 const producers_group = d3.select('#producers')
       .append('g')
       .attr('width', 500)

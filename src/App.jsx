@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import ReactDOM from 'react-dom'
 
 import NavBar from './components/NavBar.jsx';
-import VisContainer from './components/visualization/VisContainer.jsx';
+import MessagesContainer from './components/messages/MessagesContainer.jsx';
 import MainContainer from './components/main/MainContainer.jsx';
 import OptionsContainer from './components/options/OptionsContainer.jsx';
-import DebuggingContainer from './components/debugging-/DebuggingContainer.jsx';
+import MetricsContainer from './components/metrics/MetricsContainer.jsx';
 
 import firstConnect from './kafka/firstConnect.js';
 
@@ -66,11 +66,11 @@ class App extends Component {
           <NavBar/>
 
           <Switch>
-            <Route exact path="/vis">
-              <VisContainer/>
+            <Route exact path="/messages">
+              <MessagesContainer/>
             </Route>
-            <Route exact path="/debug">
-              <DebuggingContainer prometheusAddress={this.state.prometheusAddress}/>
+            <Route exact path="/metrics">
+              <MetricsContainer prometheusAddress={this.state.prometheusAddress}/>
             </Route>
             <Router exact path="/options">
               <OptionsContainer/>
