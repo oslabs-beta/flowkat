@@ -29,6 +29,7 @@ class DebuggingContainer extends Component {
   }
 
   fetchGraph() {
+    console.log(`Fetching graph for ${this.state.currMetric}`);
     try {
       // fetch('http://' + `${this.props.prometheusAddress}` + '/api/v1/query_range?query=kafka_controller_kafkacontroller_globaltopiccount&start=1632244155.671&end=1632251355.671&step=28')
       fetch(
