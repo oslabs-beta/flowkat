@@ -16,9 +16,16 @@ class DebuggingContainer extends Component {
       endTime: Date.now() / 1000,
       step: 25,
       fetchedLatest: false,
+      queryString: '',
     }
 
     this.fetchGraph = this.fetchGraph.bind(this);
+    this.onClickQuery = this.onClickQuery.bind(this);
+  }
+
+  onClickQuery(event){
+    console.log(event.target.value)
+    this.setState({currMetric: event.target.value})
   }
 
   fetchGraph() {
@@ -96,7 +103,10 @@ class DebuggingContainer extends Component {
   render() {
     return (
       <div id="debug-container">
-        <DropdownMenu/>
+        <DropdownMenu 
+          prometheusAddress={this.props.prometheusAddress}
+          onClickQuery={this.onClickQuery}
+          />
         <Plot
           data ={[
             {
