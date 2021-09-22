@@ -22,13 +22,33 @@ class MessagesContainer extends Component {
     }
   }
 
+  topicButtons() {
+    const buttonArr = [];
+    this.props.state.topics.forEach(topic => {
+      buttonArr.push(
+        <Button></Button>
+      );
+    });
+  }
+
   componentDidMount() {
     console.log('MessagesContainer Mounted');
     // let rowsToRender = []
+
+    if (this.props.state.connectStatus === 'success') {
+      console.log('Trying to consume Kafka messages...');
+      const users = []
+      // await this.props.state.topics.forEach(async topic => {
+      //   console.log(`Topic: ${topic}`);
+      //   await getTopicMessages(this.props.state.brokerAddress, topic);
+      // });
+      await getTopicMessages(this.props.state.brokerAddress, 'pancake', users);
+      setTimeout(() => console.log(users), 3000);
+    }
   }
 
   render() {
-    let rowsToRender = [];
+    // let rowsToRender = [];
 
     // for (let i = 0; i < 100; i++) {
     //   rowsToRender.push(
