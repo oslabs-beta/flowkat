@@ -23,7 +23,7 @@ class KafkaCluster extends Component {
     const output = [];
     brokerArr.forEach(ele => {
       output.push(
-        <li> - {ele.host}:{ele.port} (node ID: {ele.nodeId}{(ele.nodeId === this.props.clusterInfo.controller) ? ' - leader node' : ''})</li>
+        <li key={ele.port}> - {ele.host}:{ele.port} (node ID: {ele.nodeId}{(ele.nodeId === this.props.clusterInfo.controller) ? ' - leader node' : ''})</li>
       );
     });
     return output;
@@ -33,7 +33,7 @@ class KafkaCluster extends Component {
     const output = [];
     topicArr.forEach(ele => {
       output.push(
-        <li> - {ele}</li>
+        <li key={ele}> - {ele}</li>
       );
     });
     return output;

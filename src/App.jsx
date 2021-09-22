@@ -59,7 +59,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/vis">
-              <VisContainer/>
+              <VisContainer state={this.state} />
             </Route>
             <Route exact path="/debug">
               <DebuggingContainer/>
