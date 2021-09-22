@@ -19,16 +19,101 @@ class MessagesContainer extends Component {
           partition: '0',
         }
       ],
+      rowsToRender: [
+        <TableRows 
+          timestamp={`${Date.now()}`}
+          topicName=''
+          partition=''
+          messageContent='Waiting for messages...'
+        />
+      ],
+    }
+
+    // A starting value for what will actually be displayed on the screen
+    this.rowsToRenderVar = [
+      <TableRows 
+        timestamp={`${Date.now()}`}
+        topicName=''
+        partition=''
+        messageContent='Waiting for messages...'
+      />
+    ];
+
+    // Somewhere to cache messages we pull off the cluster so we don't lose them if another topic is clicked
+    this.messageCache = {};
+  }
+
+  // Render a button for each topic on the cluster
+  topicButtons() {
+    const buttonArr = [];
+    if (this.props.state.connectStatus === 'success') {
+      this.props.state.topics.forEach(topic => {
+        buttonArr.push(
+          <button key={topic} value={topic} onClick={(e) => this.displayMessages(e.target.value)} className="button">{topic}</button>
+        );
+      });
+      return buttonArr;
+    } else {
+      return <p>Please connect to a Kafka cluster in the Main tab.</p>
     }
   }
 
-  componentDidMount() {
+  // Get messages for a topic from the cluster, cache them, and display 100 on screen
+  async displayMessages(topic) {
+    console.log(`Clicked topic: ${topic}. Now making Kafka call...`);
+
+    // Make a call to the cluster for the topic results
+    const results = [];
+    await getTopicMessages(this.props.state.brokerAddress, topic, results);
+
+    // Wait 3 seconds for cluster to respond
+    await setTimeout(async () => {
+      // Cache all of the messages received; also grab the 100 most recent messages
+      await results.forEach(message => this.messageCache[topic].push(message));
+      const recentResults = this.messageCache[topic].slice(-100);
+
+      // Render the messages by adding them to rowsToRender
+      while (this.state.rowsToRender.length < 100 && recentResults.length) {
+        const currentMessage = recentResults.shift();
+
+        this.rowsToRenderVar.unshift(
+          <TableRows
+            timestamp={currentMessage.message.timestamp}
+            topicName={currentMessage.topic}
+            partition={currentMessage.partition}
+            messageContent={currentMessage.message.value.toString()}
+          />
+        );
+      }
+
+      await this.setState({
+        rowsToRender: this.rowsToRenderVar,
+      });
+    }, 3000)
+  }
+
+  async componentDidMount() {
+    this.props.state.topics.forEach(topic => {
+      this.messageCache[topic] = [];
+    });
+
     console.log('MessagesContainer Mounted');
     // let rowsToRender = []
+
+    // if (this.props.state.connectStatus === 'success') {
+    //   console.log('Trying to consume Kafka messages...');
+    //   const users = []
+    //   // await this.props.state.topics.forEach(async topic => {
+    //   //   console.log(`Topic: ${topic}`);
+    //   //   await getTopicMessages(this.props.state.brokerAddress, topic);
+    //   // });
+    //   await getTopicMessages(this.props.state.brokerAddress, 'pancake', users);
+    //   setTimeout(() => console.log(users), 3000);
+    // }
   }
 
   render() {
-    let rowsToRender = [];
+    // let rowsToRender = [];
 
     // for (let i = 0; i < 100; i++) {
     //   rowsToRender.push(
@@ -43,14 +128,20 @@ class MessagesContainer extends Component {
 
     return (
       <div id="messages-container">
+        <div>
+          {this.topicButtons()}
+        </div>
         <table className="table" id="messages-table">
           <thead>
-            <td>Message Content</td>
-            <td>Timestamp</td>
-            <td>Topic</td>
+            <tr>
+              <th>Timestamp</th>
+              <th>Topic</th>
+              <th>Partition</th>
+              <th>Message Content</th>
+            </tr>
           </thead>
           <tbody>
-            {/* rowsToRender */}
+            {this.state.rowsToRender}
           </tbody>
         </table>
       </div>
