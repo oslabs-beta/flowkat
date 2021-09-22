@@ -67,7 +67,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/messages">
-              <MessagesContainer/>
+              <MessagesContainer state={this.state} />
             </Route>
             <Route exact path="/metrics">
               <MetricsContainer prometheusAddress={this.state.prometheusAddress}/>
