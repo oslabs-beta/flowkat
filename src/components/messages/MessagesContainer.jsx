@@ -26,12 +26,13 @@ class MessagesContainer extends Component {
     const buttonArr = [];
     this.props.state.topics.forEach(topic => {
       buttonArr.push(
-        <Button></Button>
+        <button key={topic} onClick={() => console.log(`Clicked topic: ${topic}. This should actually then make the call to Kafka to get those messages`)} className="button">{topic}</button>
       );
     });
+    return buttonArr;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log('MessagesContainer Mounted');
     // let rowsToRender = []
 
@@ -63,6 +64,9 @@ class MessagesContainer extends Component {
 
     return (
       <div id="messages-container">
+        <div>
+          {this.topicButtons()}
+        </div>
         <table className="table" id="messages-table">
           <thead>
             <td>Message Content</td>
