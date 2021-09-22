@@ -76,12 +76,12 @@ class MessagesContainer extends Component {
       while (this.state.rowsToRender.length < 100 && recentResults.length) {
         const currentMessage = recentResults.shift();
 
-        this.state.rowsToRender.unshift(
+        this.rowsToRenderVar.unshift(
           <TableRows
-            timestamp={'a'}
-            topicName={'b'}
-            partition={'c'}
-            messageContent={'d'}
+            timestamp={currentMessage.message.timestamp}
+            topicName={currentMessage.topic}
+            partition={currentMessage.partition}
+            messageContent={currentMessage.message.value.toString()}
           />
         );
       }
@@ -133,10 +133,12 @@ class MessagesContainer extends Component {
         </div>
         <table className="table" id="messages-table">
           <thead>
-            <th>Timestamp</th>
-            <th>Topic</th>
-            <th>Partition</th>
-            <th>Message Content</th>
+            <tr>
+              <th>Timestamp</th>
+              <th>Topic</th>
+              <th>Partition</th>
+              <th>Message Content</th>
+            </tr>
           </thead>
           <tbody>
             {this.state.rowsToRender}

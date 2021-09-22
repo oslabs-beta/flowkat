@@ -12,7 +12,7 @@ class TableRows extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.timeStamp}</td>
+        <td>{this.props.timestamp}</td>
         <td>{this.props.topicName}</td>
         <td>{this.props.partition}</td>
         <td>{this.props.messageContent}</td>
