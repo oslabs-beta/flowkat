@@ -11,9 +11,7 @@ class NavBar extends Component {
   render() {
     return (
       <div id="nav-bar">
-        {/* <img src="https://cdn.discordapp.com/attachments/879428128282407013/885637964430999552/FlowKatIconLarge.png"
-          height = '32'
-          width = '32'
+        {/* <img className="icon2" src="https://cdn.discordapp.com/attachments/879428128282407013/890627536856416276/unknown.png"
         /> */}
         <Link to="/" className="button is-primary">Main</Link>
         <Link to="/messages" className="button is-primary">Messages</Link>
