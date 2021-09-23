@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import ReactDOM from 'react-dom'
 
 import NavBar from './components/NavBar.jsx';
 import MessagesContainer from './components/messages/MessagesContainer.jsx';
