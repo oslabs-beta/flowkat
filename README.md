@@ -23,8 +23,8 @@
 
 ## Features
 * ### Read Messages from your Kafka Topics
-* ### Simple GUI
-* ### Connect Your Prometheus Instance
+* ### Simple GUI that's easy to follow
+* ### Connect Your Prometheus Instance for metrics
 
 ## FlowKat Demonstration
 <p>To be added!</p>
