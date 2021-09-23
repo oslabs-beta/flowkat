@@ -107,6 +107,8 @@ class MetricsContainer extends Component {
             width: 800,
             height: 600,
             title: this.state.currMetric,
+            plot_bgcolor: "#fffaeb",
+            paper_bgcolor: "#fffaeb",
           }}
         />
 

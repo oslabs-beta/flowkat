@@ -15,6 +15,8 @@ class MainContainer extends Component {
 
     return (
       <div id="main-container">
+        <img className="Logo" src="https://cdn.discordapp.com/attachments/879428128282407013/890635351956262942/FlowKatTransparent.png"
+        /> 
         <p>Enter the address and port of your Kafka broker in the format <i>address</i>:<i>port</i></p>
         <input type="text" className="input is-secondary" placeholder="Ex: localhost:9092" onChange={(e) => address = e.target.value}></input>
         <button className="button is-primary is-light" onClick={() => this.props.attemptConnect(address)}>Submit</button>
