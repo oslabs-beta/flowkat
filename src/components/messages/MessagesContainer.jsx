@@ -57,7 +57,7 @@ class MessagesContainer extends Component {
 
         this.rowsToRenderVar.unshift(
           <TableRows
-            timestamp={currentMessage.message.timestamp}
+            timestamp={new Date(Number(currentMessage.message.timestamp)).toLocaleString()}
             topicName={currentMessage.topic}
             partition={currentMessage.partition}
             messageContent={currentMessage.message.value.toString()}
