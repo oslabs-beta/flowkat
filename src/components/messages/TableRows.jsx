@@ -1,12 +1,9 @@
-  import React, { Component } from 'react';
+import React, { Component } from 'react';
 
+// Formatter for rows of messages
 class TableRows extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    console.log('TableRows Mounted!');
   }
 
   render() {

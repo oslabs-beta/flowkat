@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// After a successful connection to the Kafka cluster, display some metrics on it
 class KafkaCluster extends Component {
   constructor(props) {
     super(props);
