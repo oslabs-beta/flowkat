@@ -22,15 +22,3 @@ class TableRows extends Component {
 }
 
 export default TableRows;
-
-
-{/* <tr>
-  <td>henry</td>
-  <td>this time</td>
-  <td>cats</td>
-</tr>
-<tr>
-  <td>Cell 1</td>
-  <td>Cell 2</td>
-  <td>Cell 3</td>
-</tr> */}

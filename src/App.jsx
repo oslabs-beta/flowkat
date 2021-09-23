@@ -6,6 +6,7 @@ import MessagesContainer from './components/messages/MessagesContainer.jsx';
 import MainContainer from './components/main/MainContainer.jsx';
 import OptionsContainer from './components/options/OptionsContainer.jsx';
 import MetricsContainer from './components/metrics/MetricsContainer.jsx';
+import TableRows from './components/messages/TableRows.jsx';
 
 import firstConnect from './kafka/firstConnect.js';
 
@@ -22,12 +23,25 @@ class App extends Component {
       topics: null,
 
       prometheusAddress: '',
+
+      messageRowsToRender: [
+        <TableRows 
+          timestamp={`${Date.now().toLocaleString()}`}
+          topicName=''
+          partition=''
+          messageContent='Waiting for messages...'
+        />,
+      ],
+
+      messageCache: {},
     }
 
     this.updateBrokerAddress = this.updateBrokerAddress.bind(this);
     this.attemptConnect = this.attemptConnect.bind(this);
-
     this.updatePrometheusAddress = this.updatePrometheusAddress.bind(this);
+
+    this.updateMessageRowsToRender = this.updateMessageRowsToRender.bind(this);
+    this.updateMessageCache = this.updateMessageCache.bind(this);
   }
 
   // Attempt to connect to Kafka on user submission
@@ -58,6 +72,18 @@ class App extends Component {
     this.setState({ prometheusAddress: address });
   }
 
+  async updateMessageRowsToRender(rowsArray) {
+    await this.setState({
+      messageRowsToRender: rowsArray,
+    });
+  }
+
+  async updateMessageCache (cache) {
+    await this.setState({
+      messageCache: cache,
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -66,7 +92,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/messages">
-              <MessagesContainer state={this.state} />
+              <MessagesContainer state={this.state} updateMessageRowsToRender={this.updateMessageRowsToRender} updateMessageCache={this.updateMessageCache}/>
             </Route>
             <Route exact path="/metrics">
               <MetricsContainer prometheusAddress={this.state.prometheusAddress}/>
