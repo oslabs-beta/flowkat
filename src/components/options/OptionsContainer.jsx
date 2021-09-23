@@ -10,22 +10,12 @@ class OptionsContainer extends Component {
     return (
       <div id="options-container">
         <div>
-          <p>Node Configuration History Lifetime</p>
+          <p>Maximum Messages Displayed</p>
           <div className="select is-primary">
             <select>
-              <option>1 week</option>
-              <option>72 hours</option>
-              <option>24 hours</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <p>Free VBucks</p>
-          <div className="select is-primary">
-            <select>
-              <option>Yes</option>
-              <option>No</option>
-              <option>What?</option>
+              <option>100</option>
+              <option>250</option>
+              <option>500</option>
             </select>
           </div>
         </div>

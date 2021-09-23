@@ -1,12 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 
-// @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 $primary: #808CC8;
 @import "./node_modules/bulma/bulma.sass";
 
 .button {
-  // border: 1px solid black;
-  // border-radius: 4px;
   box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
 }
 
@@ -20,7 +17,6 @@ table {
 
 tr {
   max-width: 50%;
-  // max-height: 20%;
 }
 
 #root {
@@ -53,17 +49,11 @@ tr {
 
   #main-container {
     background-color: #F7ECCA;
+    padding: 1em 1em 1em 1em;
   }
 
   #messages-container {
-    // display: grid;
-    // width: 90%;
-    //Five rows is accurate??: 3 for Producers/Brokers/Consumers, 2 for the lines connecting them
-    // grid-template-rows: 1fr;
-    background-color: #F7ECCA;//rgb(224, 240, 255);
-    // justify-content: space-evenly;
-    // align-content: space-between;
-    // margin: auto;
+    background-color: #F7ECCA;
     padding: 1em 1em 1em 1em;
   }
 
@@ -72,7 +62,7 @@ tr {
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: flex-start;
-    padding: 1em 1em;
+    padding: 1em 1em 1em 1em;
     background-color: #F7ECCA;
   }
 
@@ -82,11 +72,9 @@ tr {
 
   #options-container {
     background-color: #F7ECCA;
-    // width: 80%;
-    // height: 80%;
-    // margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding: 1em 1em 1em 1em;
   }
 }
 

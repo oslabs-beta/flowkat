@@ -21,11 +21,11 @@ class MainContainer extends Component {
         <KafkaConnect connectStatus={this.props.state.connectStatus} />
         <KafkaCluster clusterInfo={this.props.state.clusterInfo} topics={this.props.state.topics}/>
         
-        <br></br>
+        <hr></hr>
 
         <p>Enter the address and port of your Prometheus instance in the format <i>address:port</i></p>
-        <input type="text" className="text" placeholder="Ex: localhost:9090" onChange={(e) => promAddress = e.target.value}></input>
-        <button onClick={() => this.props.updatePrometheus(promAddress)}>Submit</button>
+        <input type="text" className="input is-secondary" placeholder="Ex: localhost:9090" onChange={(e) => promAddress = e.target.value}></input>
+        <button className="button is-primary is-light" onClick={() => this.props.updatePrometheus(promAddress)}>Submit</button>
         <p>Prometheus address: {this.props.state.prometheusAddress}</p>
       </div>
     );
