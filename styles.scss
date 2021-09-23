@@ -7,8 +7,8 @@ $primary: #808CC8;
 .button {
   // border: 1px solid black;
   // border-radius: 4px;
-  border: 9px solid #002aff;
-  box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
+  // border: 9px solid #002aff;
+  // box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
 }
 
 table {
@@ -106,6 +106,7 @@ tr {
   visibility: hidden;
   transform: translateY(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  z-index: 100;
 }
 
 .menu.active {

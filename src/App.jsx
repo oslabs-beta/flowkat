@@ -33,12 +33,16 @@ class App extends Component {
           messageContent='Waiting for messages...'
         />,
       ],
+
+      messageCache: {},
     }
 
     this.updateBrokerAddress = this.updateBrokerAddress.bind(this);
     this.attemptConnect = this.attemptConnect.bind(this);
     this.updatePrometheusAddress = this.updatePrometheusAddress.bind(this);
+
     this.updateMessageRowsToRender = this.updateMessageRowsToRender.bind(this);
+    this.updateMessageCache = this.updateMessageCache.bind(this);
   }
 
   // Attempt to connect to Kafka on user submission
@@ -75,6 +79,12 @@ class App extends Component {
     });
   }
 
+  async updateMessageCache (cache) {
+    await this.setState({
+      messageCache: cache,
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -83,7 +93,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/messages">
-              <MessagesContainer state={this.state} updateMessageRowsToRender={this.updateMessageRowsToRender}/>
+              <MessagesContainer state={this.state} updateMessageRowsToRender={this.updateMessageRowsToRender} updateMessageCache={this.updateMessageCache}/>
             </Route>
             <Route exact path="/metrics">
               <MetricsContainer prometheusAddress={this.state.prometheusAddress}/>

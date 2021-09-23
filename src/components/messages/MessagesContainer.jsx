@@ -30,7 +30,7 @@ class MessagesContainer extends Component {
     ];
 
     // Somewhere to cache messages we pull off the cluster so we don't lose them if another topic is clicked
-    this.messageCache = {};
+    this.localMessageCache = {};
   }
 
   // Render a button for each topic on the cluster
@@ -59,11 +59,13 @@ class MessagesContainer extends Component {
     // Wait 3 seconds for cluster to respond
     await setTimeout(async () => {
       // Cache all of the messages received; also grab the 100 most recent messages
-      await results.forEach(message => this.messageCache[topic].push(message));
-      const recentResults = this.messageCache[topic].slice(-100);
+      await results.forEach(message => this.localMessageCache[topic].push(message));
+      console.log('Within the setTimeout of displayMessages, results is:', results);
+      this.props.updateMessageCache(this.localMessageCache);
+      const recentResults = this.localMessageCache[topic].slice(-100);
 
       // Render the messages by adding them to rowsToRender
-      while (this.props.state.messageRowsToRender.length < 100 && recentResults.length) {
+      while (recentResults.length) {
         const currentMessage = recentResults.shift();
 
         this.rowsToRenderVar.unshift(
@@ -84,8 +86,12 @@ class MessagesContainer extends Component {
   }
 
   async componentDidMount() {
+    this.localMessageCache = this.props.state.messageCache;
+
     this.props.state.topics.forEach(topic => {
-      this.messageCache[topic] = [];
+      if (!this.localMessageCache.hasOwnProperty(topic)) {
+        this.localMessageCache[topic] = [];
+      }
     });
 
     console.log('MessagesContainer Mounted');
