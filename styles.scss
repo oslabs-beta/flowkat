@@ -7,13 +7,8 @@ $primary: #808CC8;
 .button {
   // border: 1px solid black;
   // border-radius: 4px;
-  // border: 9px solid #002aff;
-  // box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
-}
-
-#root {
-  display:flex;
-
+  border: 9px solid #002aff;
+  box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
 }
 
 table {
@@ -22,9 +17,6 @@ table {
   width: 700px;
   height: 700px;
   display: flex;
-  flex-direction: column;
-  max-height: 80%;
-  max-width: 70%;
 }
 
 tr {
@@ -32,17 +24,12 @@ tr {
   // max-height: 20%;
 }
 
-
-
 #app-container {
-  display: flex;
-  //grid-template-columns: 1fr 5fr;
-  width: auto;
-  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
   
   #nav-bar {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     gap: 8.8em;
     align-content: space-between;
@@ -111,7 +98,6 @@ tr {
   visibility: hidden;
   transform: translateY(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-  z-index: 100;
 }
 
 .menu.active {
