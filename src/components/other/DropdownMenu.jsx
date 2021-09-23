@@ -27,7 +27,7 @@ const DropdownMenu = (props) => {
     <div className="menu-container">
       <button onClick={onClick} className="menu-trigger">
         <span>Query</span>
-        <img src="https://cdn.discordapp.com/attachments/879428128282407013/890629847007760424/unknown.png" alt="User avatar" />
+        <img className="icon" src="https://cdn.discordapp.com/attachments/879428128282407013/890629847007760424/unknown.png" alt="User avatar" />
       </button>
       <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
         <ul>
