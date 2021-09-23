@@ -1,5 +1,7 @@
 const { Kafka } = require('kafkajs');
 
+// NOT YET IMPLEMENTED IN FRONT END
+
 async function getTopicMetadata(address, topic) {
   let metadata;
   let error;
@@ -14,7 +16,7 @@ async function getTopicMetadata(address, topic) {
     const admin = kafka.admin();
     await admin.connect();
 
-    // Get topic metadata from Kafka, then disconnect
+    // Get passed in topic metadata from Kafka, then disconnect
     metadata = await admin.fetchTopicMetadata({ topics: [topic] });
 
     await admin.disconnect();

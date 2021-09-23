@@ -7,7 +7,7 @@ class MetricsContainer extends Component {
     super(props)
 
     this.state = {
-      currMetric: 'kafka_server_brokertopicmetrics_bytesin_total', //kafka_controller_kafkacontroller_globaltopiccount
+      currMetric: 'kafka_server_brokertopicmetrics_bytesin_total',
       xData: [],
       yData: [],
       startTime: (Date.now() / 1000) - 3600,
@@ -22,35 +22,20 @@ class MetricsContainer extends Component {
   }
 
   onClickQuery(event){
-    console.log(event.target.value)
     this.setState({
       currMetric: event.target.value,
-    });
-    this.setState({
       fetchedLatest: false,
-    })
+    });
   }
 
   fetchGraph() {
-    console.log(`Fetching graph for ${this.state.currMetric}`);
-    
-    let fetchURL = 'http://' + `${this.props.prometheusAddress}` + '/api/v1/query_range?query=' + this.state.currMetric + '&start=' + `${this.state.startTime}` + '&end=' + `${this.state.endTime}` + '&step=' + `${this.state.step}`
-    console.log(fetchURL);
+    let fetchURL = 'http://' + `${this.props.prometheusAddress}` + '/api/v1/query_range?query=' + this.state.currMetric + '&start=' + `${this.state.startTime}` + '&end=' + `${this.state.endTime}` + '&step=' + `${this.state.step}`;
 
     try {
-      // fetch('http://' + `${this.props.prometheusAddress}` + '/api/v1/query_range?query=kafka_controller_kafkacontroller_globaltopiccount&start=1632244155.671&end=1632251355.671&step=28')
-      fetch( fetchURL
-        // 'http://' + `${this.props.prometheusAddress}` + 
-        // '/api/v1/query_range?query=' + this.state.currMetric + 
-        // '&start=' + `${this.state.startTime}` + 
-        // '&end=' + `${this.state.endTime}` + 
-        // '&step=' + `${this.state.step}`
-      )
+      fetch(fetchURL)
       .then(res => res.json())
       .then(res => res['data']['result'][0]['values'])
       .then(array => {
-        console.log(array);
-
         let newX = [];
         let newY = [];
 
@@ -60,9 +45,6 @@ class MetricsContainer extends Component {
           newX.push( (Number(arr[0]) - latestTimeInSec) / 3600);
           newY.push(Number(arr[1]));
         });
-
-        console.log(newX);
-        console.log(newY);
 
         this.setState({
           xData: newX,
@@ -79,11 +61,7 @@ class MetricsContainer extends Component {
   }
 
   xBoundsIncrease() {
-    console.log('executing xBoundsIncrease');
-
     let newStartTime = this.state.startTime - 3600;
-
-    console.log(newStartTime);
 
     this.setState({
       startTime: newStartTime,
@@ -101,7 +79,6 @@ class MetricsContainer extends Component {
   }
 
   componentDidUpdate() {
-    console.log('We updated!');
     if (!this.state.fetchedLatest) {
       this.fetchGraph();
       this.setState({
@@ -142,23 +119,3 @@ class MetricsContainer extends Component {
 }
 
 export default MetricsContainer;
-
-/* FETCHING DATA FROM PROMETHEUS
-    //call fetch request to populate cardsToRender arr
-    // fetch("http://localhost:9090/api/v1/query?query=kafka_cluster_partition_underreplicated")
-    // .then((data) => data.json())
-    // .then((res) => res.data.result)
-    // .then((arr) => {
-    //   console.log(arr);
-    //   let newData = [];
-    //   arr.forEach(obj => {
-    //     newData.push(
-    //       obj['value']['0']
-    //     );
-    //   })
-
-    //   this.setState({
-    //     data: newData,
-    //   });
-    // });
-*/

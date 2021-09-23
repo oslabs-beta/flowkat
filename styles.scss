@@ -70,6 +70,11 @@ tr {
     margin: auto;
   }
 
+  .table {
+    display: flex;
+    flex-direction: column;
+  }
+
   #options-container {
     background-color: #F7ECCA;
     display: grid;
@@ -149,5 +154,3 @@ tr {
 .menu-trigger img {
   border-radius: 90px;
 }
-
-//dropdown menu button styling
