@@ -1,32 +1,22 @@
 import React, { Component } from 'react';
 import TableRows from './TableRows.jsx';
-// import visFuncs from './visFuncs.js';
+
 import consumeAllMessages from '../../kafka/consumeAllMessages.js';
 import getTopicMessages from '../../kafka/getTopicMessages.js';
-// import ReactDOM from 'react-dom'
-// import { path } from 'path';
 
 class MessagesContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      messages: [
-        {
-          message: 'Here is a message',
-          timestamp: `${Date.now()}`,
-          topic: 'Users',
-          partition: '0',
-        }
-      ],
-      rowsToRender: [
-        <TableRows 
-          timestamp={`${Date.now()}`}
-          topicName=''
-          partition=''
-          messageContent='Waiting for messages...'
-        />
-      ],
+      // rowsToRender: [
+      //   <TableRows 
+      //     timestamp={`${Date.now()}`}
+      //     topicName=''
+      //     partition=''
+      //     messageContent='Waiting for messages...'
+      //   />
+      // ],
     }
 
     // A starting value for what will actually be displayed on the screen
@@ -73,7 +63,7 @@ class MessagesContainer extends Component {
       const recentResults = this.messageCache[topic].slice(-100);
 
       // Render the messages by adding them to rowsToRender
-      while (this.state.rowsToRender.length < 100 && recentResults.length) {
+      while (this.props.state.messageRowsToRender.length < 100 && recentResults.length) {
         const currentMessage = recentResults.shift();
 
         this.rowsToRenderVar.unshift(
@@ -85,10 +75,11 @@ class MessagesContainer extends Component {
           />
         );
       }
-
-      await this.setState({
-        rowsToRender: this.rowsToRenderVar,
-      });
+ 
+      // await this.setState({
+      //   rowsToRender: this.rowsToRenderVar,
+      // });
+      this.props.updateMessageRowsToRender(this.rowsToRenderVar);
     }, 3000)
   }
 
@@ -98,40 +89,15 @@ class MessagesContainer extends Component {
     });
 
     console.log('MessagesContainer Mounted');
-    // let rowsToRender = []
-
-    // if (this.props.state.connectStatus === 'success') {
-    //   console.log('Trying to consume Kafka messages...');
-    //   const users = []
-    //   // await this.props.state.topics.forEach(async topic => {
-    //   //   console.log(`Topic: ${topic}`);
-    //   //   await getTopicMessages(this.props.state.brokerAddress, topic);
-    //   // });
-    //   await getTopicMessages(this.props.state.brokerAddress, 'pancake', users);
-    //   setTimeout(() => console.log(users), 3000);
-    // }
   }
 
   render() {
-    // let rowsToRender = [];
-
-    // for (let i = 0; i < 100; i++) {
-    //   rowsToRender.push(
-    //     <TableRows
-    //       messageContent = {messagesArr[i]['message']}
-    //       timeStamp = {messageArr[i]['timeStamp']}
-    //       topicName = {messageArr[i]['topic']}
-    //       partition = {messageArr[i]['partition']}
-    //     />
-    //   )
-    // }
-
     return (
       <div id="messages-container">
         <div>
           {this.topicButtons()}
         </div>
-        <table className="table" id="messages-table">
+        <table className="table" id="messages-table" >
           <thead>
             <tr>
               <th>Timestamp</th>
@@ -141,10 +107,10 @@ class MessagesContainer extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.rowsToRender}
+            {this.props.state.messageRowsToRender}
           </tbody>
         </table>
-      </div>
+      </div>  
     );
   };
 }

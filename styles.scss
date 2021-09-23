@@ -17,6 +17,9 @@ table {
   width: 700px;
   height: 700px;
   display: flex;
+  flex-direction: column;
+  max-height: 80%;
+  max-width: 70%;
 }
 
 tr {
@@ -24,12 +27,17 @@ tr {
   // max-height: 20%;
 }
 
+
+
 #app-container {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
+  display: flex;
+  //grid-template-columns: 1fr 5fr;
+  width: auto;
+  height: auto;
   
   #nav-bar {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     gap: 8.8em;
     align-content: space-between;
