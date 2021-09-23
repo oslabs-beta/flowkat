@@ -38,14 +38,7 @@ class MetricsContainer extends Component {
     console.log(fetchURL);
 
     try {
-      // fetch('http://' + `${this.props.prometheusAddress}` + '/api/v1/query_range?query=kafka_controller_kafkacontroller_globaltopiccount&start=1632244155.671&end=1632251355.671&step=28')
-      fetch( fetchURL
-        // 'http://' + `${this.props.prometheusAddress}` + 
-        // '/api/v1/query_range?query=' + this.state.currMetric + 
-        // '&start=' + `${this.state.startTime}` + 
-        // '&end=' + `${this.state.endTime}` + 
-        // '&step=' + `${this.state.step}`
-      )
+      fetch( fetchURL)
       .then(res => res.json())
       .then(res => res['data']['result'][0]['values'])
       .then(array => {
@@ -130,6 +123,8 @@ class MetricsContainer extends Component {
             width: 800,
             height: 600,
             title: this.state.currMetric,
+            plot_bgcolor: "#fffaeb",
+            paper_bgcolor: "#fffaeb",
           }}
         />
 

@@ -5,6 +5,7 @@ $primary: #808CC8;
 
 .button {
   box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
+  margin: 4px 4px 4px 4px;
 }
 
 table {
@@ -50,6 +51,7 @@ tr {
   #main-container {
     background-color: #F7ECCA;
     padding: 1em 1em 1em 1em;
+    
   }
 
   #messages-container {
@@ -64,6 +66,7 @@ tr {
     align-items: flex-start;
     padding: 1em 1em 1em 1em;
     background-color: #F7ECCA;
+   
   }
 
   .title {
@@ -75,6 +78,7 @@ tr {
     flex-direction: column;
     height: 85vh;
     width: 80vw;
+    background-color: #fffaeb;
   }
 
   #options-container {
@@ -84,6 +88,12 @@ tr {
     padding: 1em 1em 1em 1em;
   }
 }
+
+.js-plotly-plot {
+  background-color: #fffaeb;
+}
+
+
 
 //Dropdown Menu styling
 .menu-container {
