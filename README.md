@@ -34,6 +34,7 @@
 - Clone this repo: ````https://github.com/oslabs-beta/flowkat.git````
 - Run the following commands in the root folder:
   - ````npm install```` 
+  - ````npm run watch````
   - ````npm run package-win```` or ````npm run package-linux````
 - Open FlowKat
 - Enter the port address for your Kafka broker and (optionally) your Prometheus instance to have FlowKat retrieve messages and metrics
