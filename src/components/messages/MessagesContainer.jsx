@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import TableRows from './TableRows.jsx';
 
-import consumeAllMessages from '../../kafka/consumeAllMessages.js';
 import getTopicMessages from '../../kafka/getTopicMessages.js';
 
+// Messages tab
 class MessagesContainer extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ class MessagesContainer extends Component {
     this.localMessageCache = {};
   }
 
-  // Render a button for each topic on the cluster
+  // Render a button for each topic on the cluster, or a message to connect if the user hasn't connected to a Kafka cluster
   topicButtons() {
     const buttonArr = [];
     if (this.props.state.connectStatus === 'success') {
@@ -68,16 +68,16 @@ class MessagesContainer extends Component {
         i++;
       }
  
-      // await this.setState({
-      //   rowsToRender: this.rowsToRenderVar,
-      // });
+      // Save the rows to render in the state
       this.props.updateMessageRowsToRender(this.rowsToRenderVar);
     }, 3000)
   }
 
   async componentDidMount() {
+    // Load all of the cached messages into the state
     this.localMessageCache = this.props.state.messageCache;
 
+    // For any topics not already in the cache, add them to the cache
     this.props.state.topics.forEach(topic => {
       if (!this.localMessageCache.hasOwnProperty(topic)) {
         this.localMessageCache[topic] = [];
