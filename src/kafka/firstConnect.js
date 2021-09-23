@@ -21,10 +21,11 @@ async function firstConnect(address) {
 
     await admin.disconnect();
   } catch (err) {
+    // Log the error if one occurs
     console.log(`There was an error connecting to the Kafka cluster: ${err}`);
     error = err;
   } finally {
-    // Return values back to react app in an array
+    // Return values back to react app in an array if there is a response, otherwise return the error
     if (cluster) return [cluster, topics];
     else return error;
   }
