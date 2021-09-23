@@ -1,14 +1,13 @@
 {
-  "name": "electron-katflow",
+  "name": "flowkat",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "dbus-launch electron .",
+    "start": "electron .",
     "watch": "webpack --config webpack.common.js --watch",
-    "noreload": "concurrently \"webpack --config webpack.common.js --watch\" \"dbus-launch electron .\"",
-    "go": "webpack --config webpack.common.js --watch && electron .",
-    "test": ""
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=static/FlowKatCirc.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"FlowKat\"",
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --prune=true --out=release-builds"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +20,7 @@
     "concurrently": "^6.2.1",
     "css-loader": "^6.2.0",
     "electron": "^14.0.0",
+    "electron-packager": "^15.4.0",
     "electron-reload": "^2.0.0-alpha.1",
     "nodemon": "^2.0.12",
     "sass": "^1.39.0",
@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "bulma": "^0.9.3",
-    "electron-builder": "^22.11.7",
     "kafkajs": "^1.15.0",
     "plotly.js": "^2.5.1",
     "react": "^17.0.2",
