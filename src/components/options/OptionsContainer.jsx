@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom'
 
+// Container for selecting number of messages to display from a topic
 class OptionsContainer extends Component {
   constructor(props) {
     super(props)
