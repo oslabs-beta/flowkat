@@ -9,6 +9,7 @@ class MainContainer extends Component {
   }
  
   render() {
+    // Store the text field values for when the user clicks submit
     let address = '';
     let promAddress = '';
 

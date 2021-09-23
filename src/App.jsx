@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import ReactDOM from 'react-dom'
 
 import NavBar from './components/NavBar.jsx';
 import MessagesContainer from './components/messages/MessagesContainer.jsx';
@@ -18,13 +17,16 @@ class App extends Component {
     super(props);
 
     this.state = {
+      // Kafka
       brokerAddress: '',
       connectStatus: 'none',
       clusterInfo: null,
       topics: null,
 
+      // Prometheus
       prometheusAddress: '',
 
+      // Messages to render in messages tab
       messageRowsToRender: [
         <TableRows 
           timestamp={`${Date.now().toLocaleString()}`}
@@ -34,13 +36,14 @@ class App extends Component {
         />,
       ],
 
+      // Cache of messages for messages tab
       messageCache: {},
     }
 
+    // State updaters
     this.updateBrokerAddress = this.updateBrokerAddress.bind(this);
     this.attemptConnect = this.attemptConnect.bind(this);
     this.updatePrometheusAddress = this.updatePrometheusAddress.bind(this);
-
     this.updateMessageRowsToRender = this.updateMessageRowsToRender.bind(this);
     this.updateMessageCache = this.updateMessageCache.bind(this);
   }
@@ -65,24 +68,24 @@ class App extends Component {
     }
   }
 
+  // Save the Kafka broker address in state
   updateBrokerAddress(address) {
     this.setState({ brokerAddress: address });
   }
 
+  // Save the Prometheus instance address in state
   updatePrometheusAddress(address) {
     this.setState({ prometheusAddress: address });
   }
 
+  // Save the currently rendered messages so users can navigate to different tabs
   async updateMessageRowsToRender(rowsArray) {
-    await this.setState({
-      messageRowsToRender: rowsArray,
-    });
+    await this.setState({ messageRowsToRender: rowsArray });
   }
 
+  // Save the received messages in a cache in state so that messages will not be lost when navigating to different tabs
   async updateMessageCache (cache) {
-    await this.setState({
-      messageCache: cache,
-    });
+    await this.setState({ messageCache: cache });
   }
 
   render() {
