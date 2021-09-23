@@ -22,37 +22,20 @@
 * [License](#license)
 
 ## Features
-* ### User-friendly GUI
-
+* ### Read Messages from your Kafka Topics
+* ### Simple GUI
+* ### Connect Your Prometheus Instance
 
 ## FlowKat Demonstration
 <p>To be added!</p>
-<!-- <hr/>
-<br>
-<p align="center">Enter the Broker and Exporter ports where your Kafka instance is running </p>
-<p align="center">
-<img src="https://klustr.app/images/Broker-Entry.gif" alt="Enter Ports">
-</p>
-<br>
-<p align="center">Upon successful submission, critical information about your brokers, topics, and consumer groups becomes immediately available </p>
-<p align="center">
-  <img src="https://klustr.app/images/Cluster-Overview-SM.gif" alt="Cluster Overview">
-</p> 
-<br>
-<p align="center">From the Core Metrics dashboard, you will see controller and partition data and can select critical metrics...</p>
-<p align="center">
-  <img src="https://klustr.app/images/Core-Metrics-SM.gif" alt="Cluster Overview">
-</p> 
-<p align="center">...to be displayed and updated, in real time!</p>
-<p align="center">
-  <img src="https://klustr.app/images/Graph-SM.gif">
-</p> -->
 
 ## Installation
 - FlowKat relies on KafkaJS in order to aggregate messages and Prometheus to graph metrics; if Prometheus is not hooked up to your Kafka Cluster instance, FlowKat should still be able to deliver compilated messages
 - Clone this repo: ````https://github.com/oslabs-beta/flowkat.git````
 - Run the following commands in the root folder:
   - ````npm install```` 
+  - ````npm run package-win```` or ````npm run package-linux````
+- Open FlowKat
 - Enter the port address for your Kafka broker and (optionally) your Prometheus instance to have FlowKat retrieve messages and metrics
 
 
