@@ -7,7 +7,6 @@ $primary: #808CC8;
 .button {
   // border: 1px solid black;
   // border-radius: 4px;
-  border: 9px solid #002aff;
   box-shadow: 0px 0px 4px 1px rgb(0, 0, 0);
 }
 
@@ -24,9 +23,19 @@ tr {
   // max-height: 20%;
 }
 
+#root {
+
+  background-color: #F7ECCA;
+}
+
 #app-container {
   display: grid;
   grid-template-columns: 1fr 5fr;
+  min-width: 100vh;
+  min-height: 100vh;
+  max-width: 100vh;
+  max-height: 100vh;
+  background-color: #F7ECCA;
   
   #nav-bar {
     display: grid;
@@ -104,6 +113,7 @@ tr {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  z-index: 100;
 }
 
 .menu ul {
