@@ -73,6 +73,8 @@ tr {
   .table {
     display: flex;
     flex-direction: column;
+    height: 90vh;
+    width: 80vw;
   }
 
   #options-container {
