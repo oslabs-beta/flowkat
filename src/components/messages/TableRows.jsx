@@ -1,21 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // Formatter for rows of messages
-class TableRows extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <tr>
-        <td>{this.props.timestamp}</td>
-        <td>{this.props.topicName}</td>
-        <td>{this.props.partition}</td>
-        <td>{this.props.messageContent}</td>
-      </tr>
-    );
-  };
+export default function TableRows({
+  timestamp,
+  topicName,
+  partition,
+  messageContent,
+}) {
+  return (
+    <tr>
+      <td>{timestamp}</td>
+      <td>{topicName}</td>
+      <td>{partition}</td>
+      <td>{messageContent}</td>
+    </tr>
+  );
 }
-
-export default TableRows;
