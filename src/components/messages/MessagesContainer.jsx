@@ -1,112 +1,89 @@
-import React, { Component } from 'react';
+import React, { useCallback } from 'react';
+
 import TableRows from './TableRows.jsx';
 
 import getTopicMessages from '../../kafka/getTopicMessages.js';
 
 // Messages tab
-class MessagesContainer extends Component {
-  constructor(props) {
-    super(props);
+export default function MessagesContainer({
+  kafka,
+  maxMessagesToRender,
+  messagesToRender,
+  setMessagesToRender,
+}) {
 
-    // A starting value for what will actually be displayed on the screen
-    this.rowsToRenderVar = [
-      <TableRows 
-        timestamp={`${Date.now()}`}
-        topicName=''
-        partition=''
-        messageContent='Waiting for messages...'
-      />
-    ];
-
-    // Somewhere to cache messages we pull off the cluster so we don't lose them if another topic is clicked
-    this.localMessageCache = {};
-  }
-
-  // Render a button for each topic on the cluster, or a message to connect if the user hasn't connected to a Kafka cluster
-  topicButtons() {
-    const buttonArr = [];
-    if (this.props.state.connectStatus === 'success') {
-      this.props.state.topics.forEach(topic => {
-        buttonArr.push(
-          <button key={topic} value={topic} onClick={(e) => this.displayMessages(e.target.value)} className="button">{topic}</button>
-        );
-      });
-      return buttonArr;
-    } else {
-      return <p>Please connect to a Kafka cluster in the Main tab.</p>
-    }
-  }
-
-  // Get messages for a topic from the cluster, cache them, and display 100 on screen
-  async displayMessages(topic) {
+  /**
+   * Get messages for a topic from the cluster and store them in App state
+   */
+  const displayMessages = useCallback(async function displayMessages(topic) {
     // Make a call to the cluster for the topic results
-    const results = [];
-    await getTopicMessages(this.props.state.brokerAddress, topic, results);
+    try {
+      const messages = await getTopicMessages(kafka.brokerAddress, topic);
 
-    // Wait 3 seconds for cluster to respond
-    await setTimeout(async () => {
-      // Cache all of the messages received; also grab the 100 most recent messages
-      await results.forEach(message => this.localMessageCache[topic].push(message));
-      this.props.updateMessageCache(this.localMessageCache);
-      const recentResults = this.localMessageCache[topic].slice(-100);
+      if (messages.length > 0) setMessagesToRender(messages);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [kafka.brokerAddress, setMessagesToRender]);
 
-      // Render the messages by adding them to rowsToRender
-      let i = 0;
-      while (recentResults.length) {
-        const currentMessage = recentResults.shift();
+  const handleTopicButtonClick = useCallback(function handleTopicButtonClick(event) {
+    displayMessages(event.target.value);
+  }, [displayMessages]);
 
-        this.rowsToRenderVar.unshift(
-          <TableRows
-            timestamp={new Date(Number(currentMessage.message.timestamp)).toLocaleString()}
-            topicName={currentMessage.topic}
-            partition={currentMessage.partition}
-            messageContent={currentMessage.message.value.toString()}
-            key={`tablerows${i}`}
-          />
-        );
+  /**
+   * @returns Either an array of button ReactElements for each topic in the cluster, or a typography ReactElement 
+   * message indicating that the user hasn't connected to a Kafka cluster
+   */
+  const topicButtons = useCallback(function topicButtons() {
+    if (kafka.connectStatus === 'success' && kafka.topics.length > 0) {
+      return kafka.topics.map(topic =>
+        <button
+          key={topic}
+          value={topic}
+          onClick={handleTopicButtonClick}
+          className="button"
+        >{topic}</button>
+      );
+    } else {
+      return <p>Please connect to a Kafka cluster in the Main tab.</p>;
+    }
+  }, [handleTopicButtonClick, kafka.connectStatus, kafka.topics]);
 
-        i++;
-      }
- 
-      // Save the rows to render in the state
-      this.props.updateMessageRowsToRender(this.rowsToRenderVar);
-    }, 3000)
-  }
-
-  async componentDidMount() {
-    // Load all of the cached messages into the state
-    this.localMessageCache = this.props.state.messageCache;
-
-    // For any topics not already in the cache, add them to the cache
-    this.props.state.topics.forEach(topic => {
-      if (!this.localMessageCache.hasOwnProperty(topic)) {
-        this.localMessageCache[topic] = [];
-      }
-    });
-  }
-
-  render() {
-    return (
-      <div id="messages-container">
-        <div>
-          {this.topicButtons()}
-        </div>
-        <table className="table" id="messages-table" >
-          <thead>
-            <tr>
-              <th>Timestamp</th>
-              <th>Topic</th>
-              <th>Partition</th>
-              <th>Message Content</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.state.messageRowsToRender}
-          </tbody>
-        </table>
-      </div>  
-    );
-  };
+  return (
+    <div id="messages-container">
+      <div>
+        {topicButtons()}
+      </div>
+      <table className="table" id="messages-table" >
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Topic</th>
+            <th>Partition</th>
+            <th>Message Content</th>
+          </tr>
+        </thead>
+        <tbody>
+          {messagesToRender.length === 0 &&
+            <TableRows
+              timestamp={`${Date.now().toLocaleString()}`}
+              topicName=''
+              partition=''
+              messageContent='Waiting for messages...'
+            />
+          }
+          {messagesToRender.length > 0 &&
+            messagesToRender.slice(-maxMessagesToRender).map((currentMessage, i) =>
+              <TableRows
+                key={`tablerows${i}`}
+                timestamp={new Date(Number(currentMessage.message.timestamp)).toLocaleString()}
+                topicName={currentMessage.topic}
+                partition={currentMessage.partition}
+                messageContent={currentMessage.message.value.toString()}
+              />)
+          }
+        </tbody>
+      </table>
+    </div>
+  );
 }
-
-export default MessagesContainer;
