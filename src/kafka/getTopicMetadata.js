@@ -3,13 +3,11 @@ const { Kafka } = require('kafkajs');
 // NOT YET IMPLEMENTED IN FRONT END
 
 async function getTopicMetadata(address, topic) {
-  let metadata;
-  let error;
   try {
     // Connect to Kafka with user provided address
     const kafka = new Kafka({
-      'clientId': 'admin',
-      'brokers': [address],
+      clientId: 'admin',
+      brokers: [address],
     });
 
     // Connect as admin
@@ -17,16 +15,14 @@ async function getTopicMetadata(address, topic) {
     await admin.connect();
 
     // Get passed in topic metadata from Kafka, then disconnect
-    metadata = await admin.fetchTopicMetadata({ topics: [topic] });
+    const metadata = await admin.fetchTopicMetadata({ topics: [topic] });
 
     await admin.disconnect();
-  } catch(err) {
+
+    return metadata;
+  } catch (err) {
     console.log(`There was an error fetching data from topic ${topic}: ${err}`);
-    error = err;
-  } finally {
-    // Return values back to react app
-    if (metadata) return metadata;
-    else return error;
+    throw err;
   }
 }
 
