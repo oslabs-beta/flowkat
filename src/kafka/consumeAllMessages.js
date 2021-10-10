@@ -4,13 +4,12 @@ const { Kafka } = require('kafkajs');
 
 async function consumeAllMessages(address, topicArr) {
   const messageCounter = {};
-  let error;
-  
+
   try {
     // Connect to Kafka with user provided address
     const kafka = new Kafka({
-      'clientId': 'flowkat-consumer',
-      'brokers': [address],
+      clientId: 'flowkat-consumer',
+      brokers: [address],
     });
 
     // Connect as a consumer
@@ -18,7 +17,7 @@ async function consumeAllMessages(address, topicArr) {
     await consumer.connect();
 
     // Subscribe to each topic in the array
-    topicArr.forEach(async topic => {
+    await Promise.all(topicArr.map(async topic => {
       await consumer.subscribe({ topic: topic, fromBeginning: true });
       // For each topic, add it to the counter object, then count the messages in that topic
       messageCounter[topic] = 0;
@@ -27,18 +26,22 @@ async function consumeAllMessages(address, topicArr) {
           messageCounter[topic] += 1;
         }
       });
-    });
+    }));
 
     // Give the cluster some time to return messages before disconnecting
-    setTimeout(async () => await consumer.disconnect(), 3000);
+    // ! so connection must be open, consider refactoring to a streaming approach instead
+    await new Promise((resolve) => {
+      setTimeout(async () => {
+        await consumer.disconnect();
+        resolve();
+      }, 3000);
+    });
 
+    return messageCounter;
   } catch (err) {
     // If there was an error, log it
     console.log(`There was an error consuming messages from the Kafka cluster: ${err}`);
-    error = err;
-  } finally {
-    if (messageCounter[topicArr[0]]) return messageCounter;
-    else if (error) return error;
+    throw err;
   }
 }
 
