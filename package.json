@@ -12,6 +12,40 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react/jsx-runtime",
+      "plugin:react-hooks/recommended"
+    ],
+    "env": {
+      "es2021": true,
+      "node": true,
+      "jest": true,
+      "browser": true
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "react/jsx-uses-react": "error",
+      "react/jsx-uses-vars": "error",
+      "react/prop-types": "off",
+      "semi": "error"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.4",
@@ -22,6 +56,9 @@
     "electron": "^14.0.0",
     "electron-packager": "^15.4.0",
     "electron-reload": "^2.0.0-alpha.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "nodemon": "^2.0.12",
     "sass": "^1.39.0",
     "sass-loader": "^12.1.0",
