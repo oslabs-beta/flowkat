@@ -6,9 +6,9 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import * as React from 'react';
 
 //COMPONENT BEING TESTED
-import MainContainer from '../src/components/main/MainContainer.jsx';
+import MainContainer from '../../src/components/main/MainContainer.jsx';
 
-//RENDER COMPONENT WITH DUMMY PARAMETERS BEFORE EACH
+//RENDER COMPONENT WITH DUMMY PARAMETERS BEFORE ALL
 beforeAll(() => {
   render(<MainContainer
     kafka = {
@@ -25,7 +25,7 @@ beforeAll(() => {
 })
 
 //TESTING FUNCTIONALITY
-test('for rendering two \'buttons\', two \'inputs\'', async () => {  
+test('should render two \'buttons\', two \'text inputs\'', async () => {  
   const mainContButtons = await screen.findAllByRole('button');
   const mainContInputs = await screen.findAllByRole('textbox');
   
