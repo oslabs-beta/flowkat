@@ -7,21 +7,66 @@
     "start": "electron .",
     "watch": "webpack --config webpack.common.js --watch",
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=static/FlowKatCirc.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"FlowKat\"",
-    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --prune=true --out=release-builds"
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --prune=true --out=release-builds",
+    "test:rtl": "jest '__tests__/component-tests' --verbose"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react/jsx-runtime",
+      "plugin:react-hooks/recommended"
+    ],
+    "env": {
+      "es2021": true,
+      "node": true,
+      "jest": true,
+      "browser": true
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "react/jsx-uses-react": "error",
+      "react/jsx-uses-vars": "error",
+      "react/prop-types": "off",
+      "semi": "error"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.15.5",
+    "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.4",
     "@babel/preset-react": "^7.14.5",
+    "@babel/runtime": "^7.15.4",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.2.1",
     "css-loader": "^6.2.0",
     "electron": "^14.0.0",
     "electron-packager": "^15.4.0",
     "electron-reload": "^2.0.0-alpha.1",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^27.3.1",
+    "jest-canvas-mock": "^2.3.1",
+    "jest-fetch-mock": "^3.0.3",
     "nodemon": "^2.0.12",
     "sass": "^1.39.0",
     "sass-loader": "^12.1.0",
@@ -37,5 +82,13 @@
     "react-dom": "^17.0.2",
     "react-plotly.js": "^2.5.1",
     "react-router-dom": "^5.3.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFiles": [
+      "./setupTest.js",
+      "jest-canvas-mock",
+      "jest-fetch-mock"
+    ]
   }
 }
