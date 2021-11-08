@@ -26,8 +26,8 @@
 * ### Simple GUI that's easy to follow
 * ### Connect Your Prometheus Instance for metrics
 
-## FlowKat Demonstration
-<p>To be added!</p>
+<!-- ## Demo
+<p>To be added!</p> -->
 
 ## Installation
 - FlowKat relies on KafkaJS in order to aggregate messages and Prometheus to graph metrics; if Prometheus is not hooked up to your Kafka Cluster instance, FlowKat should still be able to deliver compilated messages
